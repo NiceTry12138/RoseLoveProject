@@ -1,0 +1,77 @@
+<head>
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        th{
+            text-align: center;
+        }
+        table span{
+            margin: 65px;
+        }
+    </style>
+</head>
+<body style="background-color: rgba(0,0,0,0.25); border-radius: 10px;">
+<div style="margin-left: 10%; font-size: 20px;">
+    <div style="margin-top: 20px">
+        <span class="glyphicon glyphicon-comment"></span>
+        <span>我的信箱</span>
+        <hr>
+    </div>
+    <div style="overflow: hidden">
+        <div style="float: left">
+            <a href="javascript:getMail()"><span class="glyphicon glyphicon-floppy-save"></span><span>收件箱</span></a>
+        </div>
+        <div style="float:right; margin-right: 10%">
+            <a href="javascript:sendMail()"><span class="glyphicon glyphicon-floppy-open"></span><span>发件箱</span></a>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <table border="1" style="text-align: center" cellpadding="100px" id="table">
+            <tr>
+                <th><span id="send">发件人</span></th>
+                <th><span>标题</span></th>
+                <th><span>日期</span></th>
+                <th colspan="2"><span>操作</span></th>
+            </tr>
+            <tr id="tr1">
+                <th>发件人</th>
+                <th>标题</th>
+                <th>日期</th>
+                <th><a href="javascript:readMail('tr1')">阅读</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:deleteMail('tr1')">删除</a></th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var send = document.getElementById("send");
+        var table = document.getElementById("table")
+        function sendMail(){
+            send.innerText = "收件人";
+        }
+        function getMail() {
+            send.innerText = "发件人";
+        }
+
+        function readMail() {
+            alert("阅读邮件");
+        }
+        function deleteMail(index) {
+            alert("删除邮件");
+            var deleteTr = document.getElementById(index);
+            var parentTag = deleteTr.parentNode;
+            parentTag.removeChild(deleteTr);
+        }
+    </script>
+</div>
+</body>

@@ -1,0 +1,141 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: cong
+  Date: 19-5-28
+  Time: 下午11:20
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-control" content="no-cache">
+  <meta http-equiv="Cache" content="no-cache">
+  <title>主页</title>
+  <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <style>
+    a {
+      text-decoration: none;
+    }
+    a:hover{
+      text-decoration: none;
+    }
+    nav>div>a {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 100px;
+    }
+    #ta>div>a{
+      font-size: 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 100px;
+    }
+    #show > div{
+      margin-top: 20px;
+      width: 150px;
+      float: left;
+      margin-left: 80px;
+      margin-right: 80px;
+    }
+    #show > div > div > button{
+      margin: 10px 33px;
+    }
+  </style>
+
+</head>
+<body>
+<div style="background-color: white;overflow: hidden; height: 263px">
+  <div style="float: left; height: 263px">
+    <img src="${pageContext.request.contextPath}/img/u86.png" style="outline: none; " tabindex="0" id="showBg">
+  </div>
+  <div style="padding: 0px; float: right; margin-right: 5%; margin-top: 5%" >
+    <a class="btn btn-primary btn-sm    " style="margin-bottom: 10px">注册</a>
+    <span style="font-size: 30px">|</span>
+    <a class="btn btn-primary btn-sm" style="margin-bottom: 10px">登录</a>
+  </div>
+</div>
+
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container" style="font-size: 30px;">
+    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+    <a href="${pageContext.request.contextPath}/search.jsp">搜索</a>
+    <a>交友论坛</a>
+    <a>活动</a>
+    <a href="${pageContext.request.contextPath}/personnal.jsp" target="_blank">个人中心</a>
+  </div>
+</nav>
+
+<div id="ta" style="background-color: #F4F4F4; overflow: hidden">
+  <span style="font-size: 30px; margin-left: 10% ; color: aqua ">命中注定的TA</span>
+  <div class="container" >
+    <a style="margin-left: 40%">00后</a>
+    <a>90后</a>
+    <a>80后</a>
+    <a>换一组</a>
+  </div>
+  <div id="show">
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150"  class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+    <div>
+      <img src="${pageContext.request.contextPath}/img/test.jpeg" height="150" width="150" class="img-rounded">
+      <div>
+        <button class="btn btn-primary">给我写信</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

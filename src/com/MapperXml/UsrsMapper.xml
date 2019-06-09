@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.UsrsMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Usrs" >
+    <id column="UsrEmail" property="usremail" jdbcType="VARCHAR" />
+    <result column="UsrId" property="usrid" jdbcType="INTEGER" />
+    <result column="UsrName" property="usrname" jdbcType="VARCHAR" />
+    <result column="UsrSex" property="usrsex" jdbcType="VARCHAR" />
+    <result column="UsrBirth" property="usrbirth" jdbcType="DATE" />
+    <result column="UsrConstellation" property="usrconstellation" jdbcType="VARCHAR" />
+    <result column="UsrMaritalstate" property="usrmaritalstate" jdbcType="VARCHAR" />
+    <result column="UsrHeight" property="usrheight" jdbcType="REAL" />
+    <result column="UsrEducation" property="usreducation" jdbcType="VARCHAR" />
+    <result column="UsrIncome" property="usrincome" jdbcType="INTEGER" />
+    <result column="UsrOccupation" property="usroccupation" jdbcType="VARCHAR" />
+    <result column="UsrPhotostate" property="usrphotostate" jdbcType="VARCHAR" />
+    <result column="UsrHeadsculptureId" property="usrheadsculptureid" jdbcType="INTEGER" />
+    <result column="UsrIfprohibit" property="usrifprohibit" jdbcType="VARCHAR" />
+    <result column="UsrsPassword" property="usrspassword" jdbcType="VARCHAR" />
+    <result column="UsrsSignature" property="usrssignature" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UsrEmail, UsrId, UsrName, UsrSex, UsrBirth, UsrConstellation, UsrMaritalstate, UsrHeight, 
+    UsrEducation, UsrIncome, UsrOccupation, UsrPhotostate, UsrHeadsculptureId, UsrIfprohibit, 
+    UsrsPassword, UsrsSignature
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.UsrsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Usrs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from Usrs
+    where UsrEmail = #{usremail,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Usrs
+    where UsrEmail = #{usremail,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.UsrsExample" >
+    delete from Usrs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Usrs" >
+    insert into Usrs (UsrEmail, UsrId, UsrName, 
+      UsrSex, UsrBirth, UsrConstellation, 
+      UsrMaritalstate, UsrHeight, UsrEducation, 
+      UsrIncome, UsrOccupation, UsrPhotostate, 
+      UsrHeadsculptureId, UsrIfprohibit, UsrsPassword, 
+      UsrsSignature)
+    values (#{usremail,jdbcType=VARCHAR}, #{usrid,jdbcType=INTEGER}, #{usrname,jdbcType=VARCHAR}, 
+      #{usrsex,jdbcType=VARCHAR}, #{usrbirth,jdbcType=DATE}, #{usrconstellation,jdbcType=VARCHAR}, 
+      #{usrmaritalstate,jdbcType=VARCHAR}, #{usrheight,jdbcType=REAL}, #{usreducation,jdbcType=VARCHAR}, 
+      #{usrincome,jdbcType=INTEGER}, #{usroccupation,jdbcType=VARCHAR}, #{usrphotostate,jdbcType=VARCHAR}, 
+      #{usrheadsculptureid,jdbcType=INTEGER}, #{usrifprohibit,jdbcType=VARCHAR}, #{usrspassword,jdbcType=VARCHAR}, 
+      #{usrssignature,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Usrs" >
+    insert into Usrs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usremail != null" >
+        UsrEmail,
+      </if>
+      <if test="usrid != null" >
+        UsrId,
+      </if>
+      <if test="usrname != null" >
+        UsrName,
+      </if>
+      <if test="usrsex != null" >
+        UsrSex,
+      </if>
+      <if test="usrbirth != null" >
+        UsrBirth,
+      </if>
+      <if test="usrconstellation != null" >
+        UsrConstellation,
+      </if>
+      <if test="usrmaritalstate != null" >
+        UsrMaritalstate,
+      </if>
+      <if test="usrheight != null" >
+        UsrHeight,
+      </if>
+      <if test="usreducation != null" >
+        UsrEducation,
+      </if>
+      <if test="usrincome != null" >
+        UsrIncome,
+      </if>
+      <if test="usroccupation != null" >
+        UsrOccupation,
+      </if>
+      <if test="usrphotostate != null" >
+        UsrPhotostate,
+      </if>
+      <if test="usrheadsculptureid != null" >
+        UsrHeadsculptureId,
+      </if>
+      <if test="usrifprohibit != null" >
+        UsrIfprohibit,
+      </if>
+      <if test="usrspassword != null" >
+        UsrsPassword,
+      </if>
+      <if test="usrssignature != null" >
+        UsrsSignature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usremail != null" >
+        #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="usrid != null" >
+        #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="usrname != null" >
+        #{usrname,jdbcType=VARCHAR},
+      </if>
+      <if test="usrsex != null" >
+        #{usrsex,jdbcType=VARCHAR},
+      </if>
+      <if test="usrbirth != null" >
+        #{usrbirth,jdbcType=DATE},
+      </if>
+      <if test="usrconstellation != null" >
+        #{usrconstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="usrmaritalstate != null" >
+        #{usrmaritalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="usrheight != null" >
+        #{usrheight,jdbcType=REAL},
+      </if>
+      <if test="usreducation != null" >
+        #{usreducation,jdbcType=VARCHAR},
+      </if>
+      <if test="usrincome != null" >
+        #{usrincome,jdbcType=INTEGER},
+      </if>
+      <if test="usroccupation != null" >
+        #{usroccupation,jdbcType=VARCHAR},
+      </if>
+      <if test="usrphotostate != null" >
+        #{usrphotostate,jdbcType=VARCHAR},
+      </if>
+      <if test="usrheadsculptureid != null" >
+        #{usrheadsculptureid,jdbcType=INTEGER},
+      </if>
+      <if test="usrifprohibit != null" >
+        #{usrifprohibit,jdbcType=VARCHAR},
+      </if>
+      <if test="usrspassword != null" >
+        #{usrspassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrssignature != null" >
+        #{usrssignature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.UsrsExample" resultType="java.lang.Integer" >
+    select count(*) from Usrs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Usrs
+    <set >
+      <if test="record.usremail != null" >
+        UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrid != null" >
+        UsrId = #{record.usrid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usrname != null" >
+        UsrName = #{record.usrname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrsex != null" >
+        UsrSex = #{record.usrsex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrbirth != null" >
+        UsrBirth = #{record.usrbirth,jdbcType=DATE},
+      </if>
+      <if test="record.usrconstellation != null" >
+        UsrConstellation = #{record.usrconstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrmaritalstate != null" >
+        UsrMaritalstate = #{record.usrmaritalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrheight != null" >
+        UsrHeight = #{record.usrheight,jdbcType=REAL},
+      </if>
+      <if test="record.usreducation != null" >
+        UsrEducation = #{record.usreducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrincome != null" >
+        UsrIncome = #{record.usrincome,jdbcType=INTEGER},
+      </if>
+      <if test="record.usroccupation != null" >
+        UsrOccupation = #{record.usroccupation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrphotostate != null" >
+        UsrPhotostate = #{record.usrphotostate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrheadsculptureid != null" >
+        UsrHeadsculptureId = #{record.usrheadsculptureid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usrifprohibit != null" >
+        UsrIfprohibit = #{record.usrifprohibit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrspassword != null" >
+        UsrsPassword = #{record.usrspassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrssignature != null" >
+        UsrsSignature = #{record.usrssignature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Usrs
+    set UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      UsrId = #{record.usrid,jdbcType=INTEGER},
+      UsrName = #{record.usrname,jdbcType=VARCHAR},
+      UsrSex = #{record.usrsex,jdbcType=VARCHAR},
+      UsrBirth = #{record.usrbirth,jdbcType=DATE},
+      UsrConstellation = #{record.usrconstellation,jdbcType=VARCHAR},
+      UsrMaritalstate = #{record.usrmaritalstate,jdbcType=VARCHAR},
+      UsrHeight = #{record.usrheight,jdbcType=REAL},
+      UsrEducation = #{record.usreducation,jdbcType=VARCHAR},
+      UsrIncome = #{record.usrincome,jdbcType=INTEGER},
+      UsrOccupation = #{record.usroccupation,jdbcType=VARCHAR},
+      UsrPhotostate = #{record.usrphotostate,jdbcType=VARCHAR},
+      UsrHeadsculptureId = #{record.usrheadsculptureid,jdbcType=INTEGER},
+      UsrIfprohibit = #{record.usrifprohibit,jdbcType=VARCHAR},
+      UsrsPassword = #{record.usrspassword,jdbcType=VARCHAR},
+      UsrsSignature = #{record.usrssignature,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Usrs" >
+    update Usrs
+    <set >
+      <if test="usrid != null" >
+        UsrId = #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="usrname != null" >
+        UsrName = #{usrname,jdbcType=VARCHAR},
+      </if>
+      <if test="usrsex != null" >
+        UsrSex = #{usrsex,jdbcType=VARCHAR},
+      </if>
+      <if test="usrbirth != null" >
+        UsrBirth = #{usrbirth,jdbcType=DATE},
+      </if>
+      <if test="usrconstellation != null" >
+        UsrConstellation = #{usrconstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="usrmaritalstate != null" >
+        UsrMaritalstate = #{usrmaritalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="usrheight != null" >
+        UsrHeight = #{usrheight,jdbcType=REAL},
+      </if>
+      <if test="usreducation != null" >
+        UsrEducation = #{usreducation,jdbcType=VARCHAR},
+      </if>
+      <if test="usrincome != null" >
+        UsrIncome = #{usrincome,jdbcType=INTEGER},
+      </if>
+      <if test="usroccupation != null" >
+        UsrOccupation = #{usroccupation,jdbcType=VARCHAR},
+      </if>
+      <if test="usrphotostate != null" >
+        UsrPhotostate = #{usrphotostate,jdbcType=VARCHAR},
+      </if>
+      <if test="usrheadsculptureid != null" >
+        UsrHeadsculptureId = #{usrheadsculptureid,jdbcType=INTEGER},
+      </if>
+      <if test="usrifprohibit != null" >
+        UsrIfprohibit = #{usrifprohibit,jdbcType=VARCHAR},
+      </if>
+      <if test="usrspassword != null" >
+        UsrsPassword = #{usrspassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrssignature != null" >
+        UsrsSignature = #{usrssignature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UsrEmail = #{usremail,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Usrs" >
+    update Usrs
+    set UsrId = #{usrid,jdbcType=INTEGER},
+      UsrName = #{usrname,jdbcType=VARCHAR},
+      UsrSex = #{usrsex,jdbcType=VARCHAR},
+      UsrBirth = #{usrbirth,jdbcType=DATE},
+      UsrConstellation = #{usrconstellation,jdbcType=VARCHAR},
+      UsrMaritalstate = #{usrmaritalstate,jdbcType=VARCHAR},
+      UsrHeight = #{usrheight,jdbcType=REAL},
+      UsrEducation = #{usreducation,jdbcType=VARCHAR},
+      UsrIncome = #{usrincome,jdbcType=INTEGER},
+      UsrOccupation = #{usroccupation,jdbcType=VARCHAR},
+      UsrPhotostate = #{usrphotostate,jdbcType=VARCHAR},
+      UsrHeadsculptureId = #{usrheadsculptureid,jdbcType=INTEGER},
+      UsrIfprohibit = #{usrifprohibit,jdbcType=VARCHAR},
+      UsrsPassword = #{usrspassword,jdbcType=VARCHAR},
+      UsrsSignature = #{usrssignature,jdbcType=VARCHAR}
+    where UsrEmail = #{usremail,jdbcType=VARCHAR}
+  </update>
+</mapper>

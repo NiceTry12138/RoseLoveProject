@@ -1,0 +1,69 @@
+<head>
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        .test{
+            margin-top: 10px;
+        }
+        .test img{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: rgba(0,0,0,0.25); border-radius: 10px;">
+<div style="margin-left: 10%; font-size: 20px;">
+    <div>
+        <div style="margin-top: 20px">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            <span>我的头像</span>
+            <hr>
+        </div>
+        <div style="overflow: hidden">
+            <div style="float: left; margin-left: 15%">
+                <img src="../test.jpeg" width="100" height="100">
+                <span style="font-size: 10px">有照片的会员更容易找到自己的那个TA哦</span>
+            </div>
+            <div style="float:right;margin-right: 15%">
+                <button class="btn btn-Primary" style="margin-top: 10px">更换头像</button><br>
+                <button class="btn btn-Primary" style="margin-top: 10px">删除头像</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div style="overflow: hidden">
+            <div style="float: left;">
+                <span class="glyphicon glyphicon-eye-open"></span><span>我的照片</span></div>
+            <div style="float: right; margin-right: 10%"><button>上传照片</button></div>
+        </div>
+        <div style="overflow: hidden">
+            <div style="float: left">
+                <a><span class="glyphicon glyphicon-chevron-left" style="font-size: 40px"></span></a>
+            </div>
+            <div class="test" style="float: left">
+                <img id="img1" src="../test.jpeg" width="120" height="120">
+                <img id="img2" src="../test.jpeg" width="120" height="120">
+                <img id="img3" src="../test.jpeg" width="120" height="120"><br>
+                <img id="img4" src="../test.jpeg" width="120" height="120">
+                <img id="img5" src="../test.jpeg" width="120" height="120">
+                <img id="img6" src="../test.jpeg" width="120" height="120">
+            </div>
+            <div style="float: right; margin-right: 10%">
+                <a><span class="glyphicon glyphicon-chevron-right" style="font-size: 40px"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

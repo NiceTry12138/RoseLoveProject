@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="BootstrapResource/css/bootstrap.min.css">
+    <script src="BootstrapResource/js/bootstrap.min.js"></script>
+    <script>
+        function loadPage(result) {
+
+
+            var ul = $("<ul class='pagination'></ul>");
+            var li1 = $("<li></li>").append($("  <a >" +
+                "                                    <span aria-hidden=\"true\">首页</span>" +
+                "                                </a>"))
+            var li2 = $("<li></li>").append($("  <a   aria-label=\"Previous\">" +
+                "                                    <span aria-hidden=\"true\">&laquo;</span>" +
+                "                                </a>"));
+
+            var li3 = $("<li></li>").append($("  <a   aria-label=\"Previous\">" +
+                "                                    <span aria-hidden=\"true\">&raquo;</span>" +
+                "                                </a>"));
+            var li4 = $("<li></li>").append($("  <a >" +
+                "                                    <span aria-hidden=\"true\">末页</span>" +
+                "                                </a>"));
+            ul.append(li1);
+            ul.append(li2);
+
+            // li1.click(function () {
+            //         toPage(1); // 首页
+            //     }
+            // )
+            // li2.click(function () {
+            //         if(result.extend.activity.pageNum  - 1 >= 1)
+            //             toPage(result.extend.activity.pageNum  - 1);
+            //     }
+            // )
+            //
+            // li3.click(function () {
+            //         if(result.extend.activity.pageNum  - 1 <= result.extend.activity.pages )
+            //             toPage(result.extend.activity.pageNum  + 1);
+            //     }
+            // )
+            // li4.click(function () {
+            //         toPage(result.extend.activity.pages); // 末页
+            //     }
+            // )
+
+            //
+            // var firstPage = result.extend.activity.firstPage;
+            // var now = result.extend.activity.pageNum;
+            //
+            // var lastPage = result.extend.activity.lastPage;
+            // // console.log("before")
+            // for(var index = firstPage; index  <= lastPage ;index ++){
+            //     // console.log(index);
+            //     var liitems = $("<li><a>" + (index)  + "</a></li>");
+            //     liitems.attr("page",index);
+            //     if (index == now) {
+            //         liitems.addClass("active");
+            //     }
+            //     liitems.click(function () {
+            //         // alert($(this).attr("page"))
+            //         toPage($(this).attr("page"));
+            //     });
+            //     ul.append(liitems);
+            // }
+
+            ul.append(li3);
+            ul.append(li4);
+            $("#pageNav").append(ul);
+
+
+        }
+        function addComments() {
+        // <tr>
+        //     <td>
+        //     <div class="container">
+        //         <div class="row">
+        //         <img class="col-md-1 img-responsive" style="height: 50px" src="img/Headphoto.jpg"/>
+        //         <a class="col-md-2" href="#">大脸猫本猫</a>
+        //         <a class="col-md-2" href="#" id="commentTime">2019年5月18日</a>
+        //     </div>
+        //     <div class="row">
+        //         <a class="col-md-8 col-md-offset-1">生活会越来越好的</a>
+        //         </div>
+        //         </div>
+        //         </td>
+        //
+
+            var imgSrc = "img/Headphoto.jpg";
+            var CommentUserName = "大脸猫本猫";
+            var commentTime = "2019年5月18日";
+            var commentContext ="生活会越来越好的";
+            var tr = $("<tr></tr>");
+
+            var td = $("<td></td>")
+
+            var div = $("<div></div>").attr('class','container');
+
+            var div2 = $("<div></div>").attr('class','row');
+
+            var img = $("<img>").attr('class','col-md-1 img-responsive').attr('src',imgSrc).attr('style','height:50px;');
+
+            var a1 = $("<a href='#'></a>").attr('class','col-md-2').append(CommentUserName);
+
+            var a2 = $("<a href='#'></a>").attr('class','col-md-2').append(commentTime)
+            div2.append(img).append(a1).append(a2);
+
+            var div3 = $("<div></div>").attr('class','row');
+            var p = $("<p></p>").attr('class','col-md-8 col-md-offset-1').append(commentContext);
+
+            div3.append(p);
+            div.append(div2).append(div3);
+            td.append(div);
+            tr.append(td);
+            $("#comments").append(tr);
+        }
+    </script>
+    <style>
+        .Mybutton{
+            background-color:rgba(250,118,131,1);
+            color: #ffffff;
+            border: #ffffff solid 1px;
+        }
+
+    </style>
+</head>
+<body>
+<div style="height: 100px; background-color: rgba(250,118,131,1); ">
+    <br>
+    <div class="col-md-6 col-md-offset-2">
+        <img class="col-md-3  " src="img/logo3.png">
+        <img class="col-md-6  " src="img/logo2.png">
+    </div>
+    <div class="btn-group col-md-offset-1">
+        <button type="button" class="btn Mybutton">注册</button>
+        <button type="button" class="btn Mybutton">登录</button>
+    </div>
+</div>
+<div class="container">
+
+        <div class="col-md-10 col-md-offset-1 modal-content">
+            <div class="modal-header" style="background-color: rgba(228,228,228,1);height: 48px;border-radius: 5px;">
+                <p class="col-md-1">作者</p>
+                <a class="col-md-2" href="#">大脸猫爱吃鱼</a>
+                <a class="col-md-3 col-md-offset-6" href="./index2.jsp">返回论坛首页</a>
+            </div>
+            <div class="modal-body">
+              <h3 align="center">爱一个人就是爱他的全部</h3><hr>
+                <p class="col-md-10 col-md-offset-1">
+                    <br>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的故事，没浪漫，没有新奇。我是有心在佳缘上注册寻觅，他是闲来无聊注册了一下。我搜到的他，在佳缘网上几次沟通后转到QQ聊天。表达了几点各方的观点和条件后，决定见面。见面头一回，并没有给对方留下特别的印象，我带着六岁的女儿一起去的庄园游玩了一天。为了互相真诚和信任，见面前他与我都带着各自身份证亮相的。可能都是一番创伤后平静无聊，后来我又带着女儿一起出去过几次。就这样一来二去，熟了。我发现他是很懂得带孩子的男人，言谈中举止文雅，稳重，我很欣赏。但是那时他的女儿正要准备高考，也没敢往以后想。我比他年轻十岁，但我很清楚自己要什么，离婚后就给自己规划过要什么样的生活。我确定他就是我要找的人，所以当然一开始是我先对他示好喽。他没同意，我被拒绝了，曾经一度灰心也想放弃了，没想到在那个时候他却想通了，就在2016年5月20日那天跑来向我求爱。自此后我们悄悄地下恋情开展了三四个月，直到他女儿高考完，大学录取通知单到家，在一个合适的机会他将此事向她女儿公开了。这才是开始，后来的那段时间，我们经历了蛮多坎坷，首先是他女儿不适应我的存在，但是必竟十八九也算懂事。最头痛的是他女儿后来胃病加心里障碍已经达到无法正常上大学的地步，那段时间我隔三差五单位请假给她煮粥煲汤想用食疗法，开学后每个双休从宁波地铁转公交到她的学校去陪她鼓励她。自己的小女儿由外婆带着还算放心，没有分身术只能疏忽了小女儿一段时间。他一个大男人对于这种事情是没有办法解决了，他自己也快崩溃了。通过将近半年的努力，我居然准确的掌握了大女儿的心里障碍根本原因，胃病也逐渐转好。待她能正常上学后，我和他就自然的想到了婚姻，就在决定领证的前一两月，我这边娘家又有矛盾产生，让我心里憔悴。那段时间也幸亏有他在身边安慰我，我记得他曾经说过几次同样的话：有我在，我会保护你，我不会让你受外人的欺负！
+                    <br>
+                    　  &nbsp;&nbsp;&nbsp;&nbsp;距离领证的时间到了，我带着迷茫和清醒，因为对婚姻的恐惧又不想让我的小女儿失望，在我小女儿奶声奶气调皮的催促下，我克服了自己的内心，花了几分钟时间从离异变为了已婚人氏。婚后的生活越来越和谐，小女儿很粘他老爸，大女儿啥事都与我商量。两个女儿一起出门一起嘻嘻哈哈的回家来。我闲来无事做做饭打扫卫生，他闲来无事管小女儿的作业，我们再也不羡慕别人家，因为我们自己就是Happy family
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="col-md-2">评论(2)</a>
+                <a href="#" class="col-md-2 col-md-offset-1">阅读(199)</a>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="container">
+
+    <div class="col-md-10 col-md-offset-1 modal-content">
+        <div class="modal-header" style="background-color: rgba(228,228,228,1);height: 48px;border-radius: 5px;">
+            <p class="col-md-2" href="#" >发表评论</p>
+            <span class="col-md-10"></span>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="text" class="form-control" style="height: 150px;">
+
+                <div class="modal-footer ">
+                    <input class="col-md-2 btn btn-primary" value="发表"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="col-md-10 col-md-offset-1 modal-content">
+        <div class="modal-header" style="background-color: rgba(228,228,228,1);height: 48px;border-radius: 5px;">
+            <p class="col-md-2" href="#" >评论留言</p>
+            <span class="col-md-10"></span>
+        </div>
+        <div class="modal-body">
+           <table id = "comments">
+               <tr>
+                   <td>
+                       <div class="container">
+                           <div class="row">
+                               <img class="col-md-1 img-responsive" style="height: 50px" src="img/Headphoto.jpg"/>
+                               <a class="col-md-2" href="#">大脸猫本猫</a>
+                               <a class="col-md-2" href="#" id="commentTime">2019年5月18日</a>
+                           </div>
+                           <div class="row">
+                               <a class="col-md-8 col-md-offset-1">生活会越来越好的</a>
+                           </div>
+                       </div>
+                   </td>
+               </tr>
+
+           </table>
+            <script>addComments()</script>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+
+                <div class="col-md-12 ">
+
+                    <nav aria-label="Page navigation" id="pageNav">
+
+                    </nav>
+
+                </div>
+                <span class="col-md-2"></span>
+            </div>
+
+            <script>
+                loadPage({});
+            </script>
+        </div>
+
+    </div>
+
+    <div class="col-md-12"><br><br><br></div>
+
+</div>
+</body>
+</html>

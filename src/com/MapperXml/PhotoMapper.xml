@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.PhotoMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Photo" >
+    <id column="PhotoId" property="photoid" jdbcType="INTEGER" />
+    <result column="UsrEmail" property="usremail" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.Pojo.Photo" extends="BaseResultMap" >
+    <result column="PhotoContent" property="photocontent" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PhotoId, UsrEmail
+  </sql>
+  <sql id="Blob_Column_List" >
+    PhotoContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.Pojo.PhotoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.PhotoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Photo
+    where PhotoId = #{photoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Photo
+    where PhotoId = #{photoid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.PhotoExample" >
+    delete from Photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Photo" >
+    insert into Photo (PhotoId, UsrEmail, PhotoContent
+      )
+    values (#{photoid,jdbcType=INTEGER}, #{usremail,jdbcType=VARCHAR}, #{photocontent,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Photo" >
+    insert into Photo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="photoid != null" >
+        PhotoId,
+      </if>
+      <if test="usremail != null" >
+        UsrEmail,
+      </if>
+      <if test="photocontent != null" >
+        PhotoContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="photoid != null" >
+        #{photoid,jdbcType=INTEGER},
+      </if>
+      <if test="usremail != null" >
+        #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="photocontent != null" >
+        #{photocontent,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.PhotoExample" resultType="java.lang.Integer" >
+    select count(*) from Photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Photo
+    <set >
+      <if test="record.photoid != null" >
+        PhotoId = #{record.photoid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usremail != null" >
+        UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photocontent != null" >
+        PhotoContent = #{record.photocontent,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update Photo
+    set PhotoId = #{record.photoid,jdbcType=INTEGER},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      PhotoContent = #{record.photocontent,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Photo
+    set PhotoId = #{record.photoid,jdbcType=INTEGER},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Photo" >
+    update Photo
+    <set >
+      <if test="usremail != null" >
+        UsrEmail = #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="photocontent != null" >
+        PhotoContent = #{photocontent,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where PhotoId = #{photoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.Pojo.Photo" >
+    update Photo
+    set UsrEmail = #{usremail,jdbcType=VARCHAR},
+      PhotoContent = #{photocontent,jdbcType=LONGVARBINARY}
+    where PhotoId = #{photoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Photo" >
+    update Photo
+    set UsrEmail = #{usremail,jdbcType=VARCHAR}
+    where PhotoId = #{photoid,jdbcType=INTEGER}
+  </update>
+</mapper>

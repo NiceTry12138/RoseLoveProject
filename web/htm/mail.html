@@ -1,0 +1,176 @@
+<head>
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        th{
+            text-align: center;
+        }
+        table span{
+            margin: 45px;
+
+        }
+    </style>
+</head>
+<body style="background-color:  rgb(255,255,255); border-radius: 10px;">
+<div style="margin-left: 10%; font-size: 20px;">
+    <div style="margin-top: 20px">
+        <span class="glyphicon glyphicon-comment"></span>
+        <span>我的信箱</span>
+        <hr>
+    </div>
+    <div style="overflow: hidden">
+        <div style="float: left">
+            <a href="javascript:findGetMail()"><span class="glyphicon glyphicon-floppy-save"></span><span>收件箱</span></a>
+        </div>
+        <div style="float:right; margin-right: 10%">
+            <a href="javascript:findSendMail()"><span class="glyphicon glyphicon-floppy-open"></span><span>发件箱</span></a>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <table border="1" style="text-align: center" cellpadding="100px" id="table">
+            <thead>
+                <tr>
+                    <th><span id="send">发件人</span></th>
+                    <th><span>标题</span></th>
+                    <th><span>日期</span></th>
+                    <th colspan="2"><span>操作</span></th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr id="tr1">
+                    <th>发件人</th>
+                    <th>标题</th>
+                    <th>日期</th>
+                    <th><a href="" id="read">阅读</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:deleteMail('tr1')">删除</a></th>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+    <script>
+        var send = document.getElementById("send");
+        var table = document.getElementById("table");
+        var link1 = "../ReceivedMessage.html";
+        var link2 = "../senderMessage.html";
+        var atag = document.getElementById("read");
+        var tbody = document.getElementById("tbody");
+        var hr = "";
+
+        var mail = "";
+        var findMailPath = "";
+        var sendMailPath = "";
+        var deletePath = ""
+        var resultDate;
+        function initAll(themail, findPath, sendPaht, delPath) {
+            mail = themail;
+            findMailPath = findPath;
+            sendMailPath = sendPaht;
+            deletePath = delPath;
+        }
+        function findSendMail() {
+            send.innerText = "收件人";
+            $.ajax({
+                url : sendMailPath,
+                data : {"mail":mail},
+                type : "POST",
+                success : function (result) {
+                    resultDate = result;
+                    tbody.innerHTML = "";
+                    console.log(result);
+                    for (var i = 0; i < result.length; i++) {
+                        var tr = document.createElement("tr");
+                        tr.setAttribute("id", "tr"+i);
+                        var th1 = document.createElement("th");
+                        var th3 = document.createElement("th");
+                        var th4 = document.createElement("th");
+                        var th5 = document.createElement("th");
+                        var recipient =document.createTextNode(result[i].emailrecipient);
+                        var theme =document.createTextNode(result[i].emailtheme);
+                        var date = document.createTextNode(result[i].emailsendtime);
+                        th1.appendChild(recipient);
+                        th3.appendChild(theme);
+                        th4.appendChild(date);
+                        th5.innerHTML = "<th><a href=\"\" id=\"read\">阅读</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript:deleteMail(" + i + ")\">删除</a></th>";
+                        tr.appendChild(th1);
+                        tr.appendChild(th3);
+                        tr.appendChild(th4);
+                        tr.appendChild(th5);
+                        tbody.appendChild(tr);
+                    }
+                },
+                error : function (error) {
+                    alert("网络错误");
+                }
+            })
+        }
+
+        function findGetMail() {
+            send.innerText = "发件人";
+            $.ajax({
+                url : findMailPath,
+                data : {"mail":mail},
+                type : "POST",
+                success : function (result) {
+                    tbody.innerHTML = "";
+                    console.log(result);
+                    for (var i = 0; i < result.length; i++) {
+                        resultDate = result;
+                        var tr = document.createElement("tr");
+                        tr.setAttribute("id", "tr"+i);
+                        var th1 = document.createElement("th");
+                        var th3 = document.createElement("th");
+                        var th4 = document.createElement("th");
+                        var th5 = document.createElement("th");
+                        var recipient =document.createTextNode(result[i].emailrecipient);
+                        var theme =document.createTextNode(result[i].emailtheme);
+                        var date = document.createTextNode(result[i].emailsendtime);
+                        th1.appendChild(recipient);
+                        th3.appendChild(theme);
+                        th4.appendChild(date);
+                        th5.innerHTML = "<th><a href=\"\" id=\"read\">阅读</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript:deleteMail(" + i + ")\">删除</a></th>";
+                        tr.appendChild(th1);
+                        tr.appendChild(th3);
+                        tr.appendChild(th4);
+                        tr.appendChild(th5);
+                        tbody.appendChild(tr);
+                    }
+                },
+                error : function (error) {
+                    alert("网络错误");
+                }
+            })
+        }
+
+        function deleteMail(id) {
+            $.ajax({
+                url : deletePath,
+                type:"POST",
+                data : {"mailId":resultDate[id].emailid},
+                success : function (result) {
+                    console.log(result);
+                    var tr = document.getElementById("tr" + id);
+                    var trParent = tr.parentNode;
+                    trParent.removeChild(tr);
+                    alert("删除成功");
+                },
+                error : function (error) {
+                    alert("删除失败");
+                }
+            })
+        }
+    </script>
+</div>
+</body>

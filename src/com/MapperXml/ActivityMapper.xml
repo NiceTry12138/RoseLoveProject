@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Activity" >
+    <id column="ActivityId" property="activityid" jdbcType="INTEGER" />
+    <result column="ActivityName" property="activityname" jdbcType="VARCHAR" />
+    <result column="ActivityStarttime" property="activitystarttime" jdbcType="TIMESTAMP" />
+    <result column="ActivityEndtime" property="activityendtime" jdbcType="TIMESTAMP" />
+    <result column="ActivityAddress" property="activityaddress" jdbcType="VARCHAR" />
+    <result column="ActivityType" property="activitytype" jdbcType="VARCHAR" />
+    <result column="ActivityDescribe" property="activitydescribe" jdbcType="VARCHAR" />
+    <result column="ActivityCost" property="activitycost" jdbcType="INTEGER" />
+    <result column="ActivityCostexplain" property="activitycostexplain" jdbcType="VARCHAR" />
+    <result column="ActivityCallnumber" property="activitycallnumber" jdbcType="VARCHAR" />
+    <result column="ActivityState" property="activitystate" jdbcType="VARCHAR" />
+    <result column="ActivityIfdeleted" property="activityifdeleted" jdbcType="VARCHAR" />
+    <result column="ActivityBoylimit" property="activityboylimit" jdbcType="INTEGER" />
+    <result column="ActivityGirllimit" property="activitygirllimit" jdbcType="INTEGER" />
+    <result column="ActivityOrganizer" property="activityorganizer" jdbcType="VARCHAR" />
+    <result column="ActivityOrganizerEmail" property="activityorganizeremail" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.Pojo.Activity" extends="BaseResultMap" >
+    <result column="ActivityPic" property="activitypic" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ActivityId, ActivityName, ActivityStarttime, ActivityEndtime, ActivityAddress, ActivityType, 
+    ActivityDescribe, ActivityCost, ActivityCostexplain, ActivityCallnumber, ActivityState, 
+    ActivityIfdeleted, ActivityBoylimit, ActivityGirllimit, ActivityOrganizer, ActivityOrganizerEmail
+  </sql>
+  <sql id="Blob_Column_List" >
+    ActivityPic
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.Pojo.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Activity
+    where ActivityId = #{activityid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Activity
+    where ActivityId = #{activityid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.ActivityExample" >
+    delete from Activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Activity" >
+    insert into Activity (ActivityId, ActivityName, ActivityStarttime, 
+      ActivityEndtime, ActivityAddress, ActivityType, 
+      ActivityDescribe, ActivityCost, ActivityCostexplain, 
+      ActivityCallnumber, ActivityState, ActivityIfdeleted, 
+      ActivityBoylimit, ActivityGirllimit, ActivityOrganizer, 
+      ActivityOrganizerEmail, ActivityPic
+      )
+    values (#{activityid,jdbcType=INTEGER}, #{activityname,jdbcType=VARCHAR}, #{activitystarttime,jdbcType=TIMESTAMP}, 
+      #{activityendtime,jdbcType=TIMESTAMP}, #{activityaddress,jdbcType=VARCHAR}, #{activitytype,jdbcType=VARCHAR}, 
+      #{activitydescribe,jdbcType=VARCHAR}, #{activitycost,jdbcType=INTEGER}, #{activitycostexplain,jdbcType=VARCHAR}, 
+      #{activitycallnumber,jdbcType=VARCHAR}, #{activitystate,jdbcType=VARCHAR}, #{activityifdeleted,jdbcType=VARCHAR}, 
+      #{activityboylimit,jdbcType=INTEGER}, #{activitygirllimit,jdbcType=INTEGER}, #{activityorganizer,jdbcType=VARCHAR}, 
+      #{activityorganizeremail,jdbcType=VARCHAR}, #{activitypic,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Activity" >
+    insert into Activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityid != null" >
+        ActivityId,
+      </if>
+      <if test="activityname != null" >
+        ActivityName,
+      </if>
+      <if test="activitystarttime != null" >
+        ActivityStarttime,
+      </if>
+      <if test="activityendtime != null" >
+        ActivityEndtime,
+      </if>
+      <if test="activityaddress != null" >
+        ActivityAddress,
+      </if>
+      <if test="activitytype != null" >
+        ActivityType,
+      </if>
+      <if test="activitydescribe != null" >
+        ActivityDescribe,
+      </if>
+      <if test="activitycost != null" >
+        ActivityCost,
+      </if>
+      <if test="activitycostexplain != null" >
+        ActivityCostexplain,
+      </if>
+      <if test="activitycallnumber != null" >
+        ActivityCallnumber,
+      </if>
+      <if test="activitystate != null" >
+        ActivityState,
+      </if>
+      <if test="activityifdeleted != null" >
+        ActivityIfdeleted,
+      </if>
+      <if test="activityboylimit != null" >
+        ActivityBoylimit,
+      </if>
+      <if test="activitygirllimit != null" >
+        ActivityGirllimit,
+      </if>
+      <if test="activityorganizer != null" >
+        ActivityOrganizer,
+      </if>
+      <if test="activityorganizeremail != null" >
+        ActivityOrganizerEmail,
+      </if>
+      <if test="activitypic != null" >
+        ActivityPic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityid != null" >
+        #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="activityname != null" >
+        #{activityname,jdbcType=VARCHAR},
+      </if>
+      <if test="activitystarttime != null" >
+        #{activitystarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityendtime != null" >
+        #{activityendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityaddress != null" >
+        #{activityaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="activitytype != null" >
+        #{activitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="activitydescribe != null" >
+        #{activitydescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="activitycost != null" >
+        #{activitycost,jdbcType=INTEGER},
+      </if>
+      <if test="activitycostexplain != null" >
+        #{activitycostexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="activitycallnumber != null" >
+        #{activitycallnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="activitystate != null" >
+        #{activitystate,jdbcType=VARCHAR},
+      </if>
+      <if test="activityifdeleted != null" >
+        #{activityifdeleted,jdbcType=VARCHAR},
+      </if>
+      <if test="activityboylimit != null" >
+        #{activityboylimit,jdbcType=INTEGER},
+      </if>
+      <if test="activitygirllimit != null" >
+        #{activitygirllimit,jdbcType=INTEGER},
+      </if>
+      <if test="activityorganizer != null" >
+        #{activityorganizer,jdbcType=VARCHAR},
+      </if>
+      <if test="activityorganizeremail != null" >
+        #{activityorganizeremail,jdbcType=VARCHAR},
+      </if>
+      <if test="activitypic != null" >
+        #{activitypic,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from Activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Activity
+    <set >
+      <if test="record.activityid != null" >
+        ActivityId = #{record.activityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityname != null" >
+        ActivityName = #{record.activityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitystarttime != null" >
+        ActivityStarttime = #{record.activitystarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activityendtime != null" >
+        ActivityEndtime = #{record.activityendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activityaddress != null" >
+        ActivityAddress = #{record.activityaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitytype != null" >
+        ActivityType = #{record.activitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitydescribe != null" >
+        ActivityDescribe = #{record.activitydescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitycost != null" >
+        ActivityCost = #{record.activitycost,jdbcType=INTEGER},
+      </if>
+      <if test="record.activitycostexplain != null" >
+        ActivityCostexplain = #{record.activitycostexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitycallnumber != null" >
+        ActivityCallnumber = #{record.activitycallnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitystate != null" >
+        ActivityState = #{record.activitystate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityifdeleted != null" >
+        ActivityIfdeleted = #{record.activityifdeleted,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityboylimit != null" >
+        ActivityBoylimit = #{record.activityboylimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.activitygirllimit != null" >
+        ActivityGirllimit = #{record.activitygirllimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityorganizer != null" >
+        ActivityOrganizer = #{record.activityorganizer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityorganizeremail != null" >
+        ActivityOrganizerEmail = #{record.activityorganizeremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activitypic != null" >
+        ActivityPic = #{record.activitypic,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update Activity
+    set ActivityId = #{record.activityid,jdbcType=INTEGER},
+      ActivityName = #{record.activityname,jdbcType=VARCHAR},
+      ActivityStarttime = #{record.activitystarttime,jdbcType=TIMESTAMP},
+      ActivityEndtime = #{record.activityendtime,jdbcType=TIMESTAMP},
+      ActivityAddress = #{record.activityaddress,jdbcType=VARCHAR},
+      ActivityType = #{record.activitytype,jdbcType=VARCHAR},
+      ActivityDescribe = #{record.activitydescribe,jdbcType=VARCHAR},
+      ActivityCost = #{record.activitycost,jdbcType=INTEGER},
+      ActivityCostexplain = #{record.activitycostexplain,jdbcType=VARCHAR},
+      ActivityCallnumber = #{record.activitycallnumber,jdbcType=VARCHAR},
+      ActivityState = #{record.activitystate,jdbcType=VARCHAR},
+      ActivityIfdeleted = #{record.activityifdeleted,jdbcType=VARCHAR},
+      ActivityBoylimit = #{record.activityboylimit,jdbcType=INTEGER},
+      ActivityGirllimit = #{record.activitygirllimit,jdbcType=INTEGER},
+      ActivityOrganizer = #{record.activityorganizer,jdbcType=VARCHAR},
+      ActivityOrganizerEmail = #{record.activityorganizeremail,jdbcType=VARCHAR},
+      ActivityPic = #{record.activitypic,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Activity
+    set ActivityId = #{record.activityid,jdbcType=INTEGER},
+      ActivityName = #{record.activityname,jdbcType=VARCHAR},
+      ActivityStarttime = #{record.activitystarttime,jdbcType=TIMESTAMP},
+      ActivityEndtime = #{record.activityendtime,jdbcType=TIMESTAMP},
+      ActivityAddress = #{record.activityaddress,jdbcType=VARCHAR},
+      ActivityType = #{record.activitytype,jdbcType=VARCHAR},
+      ActivityDescribe = #{record.activitydescribe,jdbcType=VARCHAR},
+      ActivityCost = #{record.activitycost,jdbcType=INTEGER},
+      ActivityCostexplain = #{record.activitycostexplain,jdbcType=VARCHAR},
+      ActivityCallnumber = #{record.activitycallnumber,jdbcType=VARCHAR},
+      ActivityState = #{record.activitystate,jdbcType=VARCHAR},
+      ActivityIfdeleted = #{record.activityifdeleted,jdbcType=VARCHAR},
+      ActivityBoylimit = #{record.activityboylimit,jdbcType=INTEGER},
+      ActivityGirllimit = #{record.activitygirllimit,jdbcType=INTEGER},
+      ActivityOrganizer = #{record.activityorganizer,jdbcType=VARCHAR},
+      ActivityOrganizerEmail = #{record.activityorganizeremail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Activity" >
+    update Activity
+    <set >
+      <if test="activityname != null" >
+        ActivityName = #{activityname,jdbcType=VARCHAR},
+      </if>
+      <if test="activitystarttime != null" >
+        ActivityStarttime = #{activitystarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityendtime != null" >
+        ActivityEndtime = #{activityendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityaddress != null" >
+        ActivityAddress = #{activityaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="activitytype != null" >
+        ActivityType = #{activitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="activitydescribe != null" >
+        ActivityDescribe = #{activitydescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="activitycost != null" >
+        ActivityCost = #{activitycost,jdbcType=INTEGER},
+      </if>
+      <if test="activitycostexplain != null" >
+        ActivityCostexplain = #{activitycostexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="activitycallnumber != null" >
+        ActivityCallnumber = #{activitycallnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="activitystate != null" >
+        ActivityState = #{activitystate,jdbcType=VARCHAR},
+      </if>
+      <if test="activityifdeleted != null" >
+        ActivityIfdeleted = #{activityifdeleted,jdbcType=VARCHAR},
+      </if>
+      <if test="activityboylimit != null" >
+        ActivityBoylimit = #{activityboylimit,jdbcType=INTEGER},
+      </if>
+      <if test="activitygirllimit != null" >
+        ActivityGirllimit = #{activitygirllimit,jdbcType=INTEGER},
+      </if>
+      <if test="activityorganizer != null" >
+        ActivityOrganizer = #{activityorganizer,jdbcType=VARCHAR},
+      </if>
+      <if test="activityorganizeremail != null" >
+        ActivityOrganizerEmail = #{activityorganizeremail,jdbcType=VARCHAR},
+      </if>
+      <if test="activitypic != null" >
+        ActivityPic = #{activitypic,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where ActivityId = #{activityid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.Pojo.Activity" >
+    update Activity
+    set ActivityName = #{activityname,jdbcType=VARCHAR},
+      ActivityStarttime = #{activitystarttime,jdbcType=TIMESTAMP},
+      ActivityEndtime = #{activityendtime,jdbcType=TIMESTAMP},
+      ActivityAddress = #{activityaddress,jdbcType=VARCHAR},
+      ActivityType = #{activitytype,jdbcType=VARCHAR},
+      ActivityDescribe = #{activitydescribe,jdbcType=VARCHAR},
+      ActivityCost = #{activitycost,jdbcType=INTEGER},
+      ActivityCostexplain = #{activitycostexplain,jdbcType=VARCHAR},
+      ActivityCallnumber = #{activitycallnumber,jdbcType=VARCHAR},
+      ActivityState = #{activitystate,jdbcType=VARCHAR},
+      ActivityIfdeleted = #{activityifdeleted,jdbcType=VARCHAR},
+      ActivityBoylimit = #{activityboylimit,jdbcType=INTEGER},
+      ActivityGirllimit = #{activitygirllimit,jdbcType=INTEGER},
+      ActivityOrganizer = #{activityorganizer,jdbcType=VARCHAR},
+      ActivityOrganizerEmail = #{activityorganizeremail,jdbcType=VARCHAR},
+      ActivityPic = #{activitypic,jdbcType=LONGVARBINARY}
+    where ActivityId = #{activityid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Activity" >
+    update Activity
+    set ActivityName = #{activityname,jdbcType=VARCHAR},
+      ActivityStarttime = #{activitystarttime,jdbcType=TIMESTAMP},
+      ActivityEndtime = #{activityendtime,jdbcType=TIMESTAMP},
+      ActivityAddress = #{activityaddress,jdbcType=VARCHAR},
+      ActivityType = #{activitytype,jdbcType=VARCHAR},
+      ActivityDescribe = #{activitydescribe,jdbcType=VARCHAR},
+      ActivityCost = #{activitycost,jdbcType=INTEGER},
+      ActivityCostexplain = #{activitycostexplain,jdbcType=VARCHAR},
+      ActivityCallnumber = #{activitycallnumber,jdbcType=VARCHAR},
+      ActivityState = #{activitystate,jdbcType=VARCHAR},
+      ActivityIfdeleted = #{activityifdeleted,jdbcType=VARCHAR},
+      ActivityBoylimit = #{activityboylimit,jdbcType=INTEGER},
+      ActivityGirllimit = #{activitygirllimit,jdbcType=INTEGER},
+      ActivityOrganizer = #{activityorganizer,jdbcType=VARCHAR},
+      ActivityOrganizerEmail = #{activityorganizeremail,jdbcType=VARCHAR}
+    where ActivityId = #{activityid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>活动</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="BootstrapResource/css/bootstrap.min.css">
+    <script src="BootstrapResource/js/bootstrap.min.js"></script>
+
+    <style>
+        .head-font
+        {
+              font-size: 15px;
+              color:#0f0f0f;
+              font-weight:400;
+              font-family: 微软雅黑;
+          }
+        .activity-font
+        {
+            line-height: 22px;
+            font-size: 18px;
+            color:white;
+            font-weight:400;
+            font-family: 微软雅黑;
+        }
+        .activity-font:hover
+        {
+            color: white;
+            text-decoration: none;
+        }
+        .isContinue-font
+        {
+            line-height: 40px;
+            font-size: 15px;
+            color:white;
+            font-weight:400;
+            font-family: 微软雅黑;
+        }
+        .myCircle
+        {
+            margin-top: 35px;
+            width: 90px;
+            height: 90px;
+            background-color: #FF6666;
+            border-radius: 50%;
+            border: #797979 solid 1px;
+        }
+        .myCircle:hover
+        {
+            margin-top: 35px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: #797979 solid 1px;
+            background-color: #FF3300;
+        }
+        .myCircleEnd
+         {
+             margin-top: 35px;
+             width: 90px;
+             height: 90px;
+             background-color: rgb(153,153,153);
+             border-radius: 50%;
+             border: #797979 solid 1px;
+         }
+        .myButton
+        {
+            background-color:rgb(250,118,131);
+            color: #ffffff;
+            border: #ffffff solid 1px;
+        }
+        .initPos
+        {
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
+        .tagIco
+        {
+            background-color: #FF6666;
+            width: 100px;
+            height: 40px;
+            box-shadow: 3px 3px 8px #797979;
+        }
+        .tagIcoEnd
+        {
+            background-color: rgb(153,153,153);
+            width: 100px;
+            height: 40px;
+            box-shadow: 3px 3px 8px #797979;
+        }
+    </style>
+    <script>
+        //loadPage：加载切换页面按钮。
+        function loadPage(result)
+        {
+            var ul = $("<ul class='pagination'></ul>");
+            var li1 = $("<li></li>").append($("<a>" + "<span aria-hidden=\"true\">首页</span>" + "</a>"))
+            var li2 = $("<li></li>").append($("<a aria-label=\"Previous\">" + "<span aria-hidden=\"true\">&laquo;</span>" + "</a>"));
+            var li3 = $("<li></li>").append($("<a aria-label=\"Previous\">" + "<span aria-hidden=\"true\">&raquo;</span>" + "</a>"));
+            var li4 = $("<li></li>").append($("<a>" + "<span aria-hidden=\"true\">末页</span>" + "</a>"));
+            ul.append(li1).append(li2);
+            // li1.click(function () {
+            //         toPage(1); // 首页
+            //     }
+            // )
+            // li2.click(function () {
+            //         if(result.extend.activity.pageNum  - 1 >= 1)
+            //             toPage(result.extend.activity.pageNum  - 1);
+            //     }
+            // )
+            //
+            // li3.click(function () {
+            //         if(result.extend.activity.pageNum  - 1 <= result.extend.activity.pages )
+            //             toPage(result.extend.activity.pageNum  + 1);
+            //     }
+            // )
+            // li4.click(function () {
+            //         toPage(result.extend.activity.pages); // 末页
+            //     }
+            // )
+
+            //
+            // var firstPage = result.extend.activity.firstPage;
+            // var now = result.extend.activity.pageNum;
+            //
+            // var lastPage = result.extend.activity.lastPage;
+            // // console.log("before")
+            // for(var index = firstPage; index  <= lastPage ;index ++){
+            //     // console.log(index);
+            //     var liitems = $("<li><a>" + (index)  + "</a></li>");
+            //     liitems.attr("page",index);
+            //     if (index == now) {
+            //         liitems.addClass("active");
+            //     }
+            //     liitems.click(function () {
+            //         // alert($(this).attr("page"))
+            //         toPage($(this).attr("page"));
+            //     });
+            //     ul.append(liitems);
+            // }
+            ul.append(li3).append(li4);
+            $("#pageNav").append(ul);
+        }
+        //transStr：调用该函数以将字符串放入一个行高为25px的div里，并返回该div。
+        function transStr(tStr)
+        {
+            return $("<div style='line-height: 25px;'></div>").append(tStr);
+        }
+        //createActivityWithInfo：调用该函数以根据所给信息增加一个活动板块。
+        function createActivityWithInfo(isEnded, activityName, startYear, startMonth, startDay, startHour, startMin, endYear, endMonth, endDay, endHour, endMin, location, boyNum, girlNum, imgSrc)
+        {
+            var stTime = startYear + "年" + startMonth + "月" + startDay + "日" + startHour + ":" + startMin;
+            var edTime = endYear + "年" + endMonth + "月" + endDay + "日" + endHour + ":" + endMin;
+            var people = "男："+ boyNum + " 人 | 女：" + girlNum + "人";
+            var tr = $("<tr></tr>");
+            var divBox = $("<div style = 'background-color:white; margin: 20px'></div>");
+            var td = $("<td style='background-color:white; text-align: center' class='col-md-1'></td>");
+
+            var div0 = $("<div style='width: 240px; height: 156px;' class='col-md-1'></div>");
+            var img = $("<img  style='width: 240px; height: 156px;' class='initPos'/>").attr("src", imgSrc);
+            var strInfo = isEnded ? "已结束" : "进行中";
+            var p = $("<p class='isContinue-font'></p>").append(strInfo);
+            var strDivTagClass = isEnded ? "tagIcoEnd initPos" : "tagIco initPos";
+            var divTag = $("<div></div>").attr("class", strDivTagClass);
+            divTag.append(p);
+            div0.append(img).append(divTag);
+
+            var div1 = $("<div style='text-align: left' class = 'col-md-5'></div>");
+
+            var h3 = $("<div style='font-weight: bold; font-size: 20px; line-height: 50px'></div>").append(activityName);
+            var table = $("<table></table>");
+
+            var timeStTr = $("<tr></tr>");
+            var td0 =$("<td></td>").append(transStr("开始"));
+            var td1=$("<td></td>").append(transStr("&nbsp;&nbsp;&nbsp;"));
+            var td2=$("<td></td>").append(transStr(stTime));
+            timeStTr.append(td0).append(td1).append(td2);
+
+            var timeEdTr = $("<tr></tr>");
+            var td3 =$("<td></td>").append(transStr("结束"));
+            var td4=$("<td></td>").append(transStr("&nbsp;&nbsp;&nbsp;"));
+            var td5=$("<td></td>").append(transStr(edTime));
+            timeEdTr.append(td3).append(td4).append(td5);
+
+            var locationTr = $("<tr></tr>");
+            var td6 =$("<td></td>").append(transStr("地点"));
+            var td7=$("<td></td>").append(transStr("&nbsp;&nbsp;&nbsp;"));
+            var td8=$("<td></td>").append(transStr(location));
+            locationTr.append(td6).append(td7).append(td8);
+
+            var peopleNum = $("<tr></tr>");
+            var td9 =$("<td></td>").append(transStr("人数"));
+            var td10=$("<td></td>").append(transStr("&nbsp;&nbsp;&nbsp;"));
+            var td11=$("<td></td>").append(transStr(people));
+            peopleNum.append(td9).append(td10).append(td11);
+
+            table.append(timeStTr).append(timeEdTr).append(locationTr).append(peopleNum);
+            div1.append(h3).append(table);
+
+            var div2 = $("<div align='center' class='col-md-2 col-md-offset-1'></div>");
+            var strDivCircleClass = isEnded ? "myCircleEnd" : "myCircle";
+            var divCircle = $("<div style='text-align: center'></div>").attr('class', strDivCircleClass);
+            var aSearch = $("<a class='activity-font'><br>查看<br>活动<br></a>");
+            if(!isEnded) aSearch = aSearch.attr("href", "./concreteActivity.html");
+            divCircle.append(aSearch);
+            div2.append(divCircle);
+
+            td.append(div0).append(div1).append(div2);
+            divBox.append(td);
+            tr.append(divBox);
+            $("#BoardTable").append(tr);
+        }
+        //createActivity：在该函数中处理信息，添加活动。
+        function createActivity(result)
+        {
+
+            for(var i = 0 ;i < 5 ;i ++)
+            {
+                /*文章标题*/
+                var activityName = "许你一城星河许你一城";
+                /*开始时间*/
+                var startYear = "2019", startMonth = "5", startDay = "18", startHour = "13", startMin = "13";
+                /*结束时间*/
+                var endYear = "2019", endMonth = "6", endDay = "6", endHour = "15", endMin = "10";
+                /*活动地点*/
+                var location = "湖北省武汉市";
+                /*活动总人数*/
+                var boyNum = "120", girlNum = "100";
+                /*活动标题图*/
+                var imgSrc = "img/activity.jpg";
+                /*是否结束*/
+                var isEnded = (i % 2 == 0);
+                createActivityWithInfo(isEnded, activityName, startYear, startMonth, startDay, startHour, startMin, endYear, endMonth, endDay, endHour, endMin, location, boyNum, girlNum, imgSrc);
+            }
+            //////////////////////////////此处填入数据//////////////////////////////
+        }
+        //countActivity：在该函数中更新“报名进行中x场，已结束x场”信息。
+        function countActivity(result)
+        {
+            //////////////////////////////此处填入数据//////////////////////////////
+            /*正在进行的活动数量*/
+            var continueActivityNum = "3";
+            /*已结束的活动数量*/
+            var endedActivityNum = "16";
+            //////////////////////////////此处填入数据//////////////////////////////
+            var nowContinue = document.getElementById("nowContinue");
+            var nowEnded = document.getElementById("nowEnded");
+            nowContinue.innerHTML = "报名进行中: " + continueActivityNum + "场";
+            nowEnded.innerHTML = "已结束: " + endedActivityNum + "场";
+        }
+    </script>
+</head>
+
+<body style="background-color: rgb(246,246,246);">
+    <!--标头-->
+    <div style="padding-bottom: 5%; background-color: rgb(250,118,131); ">
+        <br>
+        <div style="text-align: right;">
+            <button type="button" class="btn myButton" onclick = "window.location.href = 'register.jsp'">注册</button>
+            <button type="button" class="btn myButton" style="margin-right: 30px;" onclick = "window.location.href = 'login.jsp'">登录</button>
+        </div>
+        <div style="text-align: center;">
+            <img style="height: auto; width: 70%;" src="img/logo1.png">
+        </div>
+    </div>
+
+    <div class="container">
+        <!--导航栏-->
+        <div class="row">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#example-navbar-collapse">
+                            <span class="sr-only">切换导航</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand head-link" href="index.html">Rose在线情缘</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                        <ul class="nav navbar-nav col-md-10" style="text-align: center">
+                            <li class="col-md-2 col-md-offset-1"><a class="head-font" href="index2.jsp">首页</a></li>
+                            <li class="col-md-2"><a class="head-font" href="search.jsp">搜索</a></li>
+                            <li class="col-md-2"><a class="head-font" href="communication.html">交友论坛</a></li>
+                            <li class="active col-md-2"><a class="head-font" href="activity.html">活动</a></li>
+                            <li class="col-md-2"><a class="head-font" href="personnal.jsp">个人中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!--本页导航-->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="background-color: rgba(255,255,255,1); line-height: 46px; ">
+                <div class="col-md-3" id="nowContinue"></div>
+                <div class="col-md-2 col-md-offset-1" id = "nowEnded"></div>
+                <div class="col-md-4 col-md-offset-2" style="text-align: right"><a href="./addActivity.html">发布活动</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./myActivity.html">我的活动</a></div>
+            </div>
+        </div>
+        <script>
+            countActivity({});
+        </script>
+
+        <!--活动-->
+        <div class="row" align="center">
+            <table class="col-md-10 col-md-offset-1" cellspacing="100px;" id="BoardTable">
+            </table>
+        </div>
+        <script>
+            createActivity({});
+        </script>
+
+        <!--上下翻页-->
+        <div class="row" align = "center">
+            <nav aria-label="Page navigation" id="pageNav">
+            </nav>
+        </div>
+        <script>
+            loadPage({});
+        </script>
+
+    </div>
+</body>
+</html>

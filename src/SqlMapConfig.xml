@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"> <!-- 如果这里报错，就将mybatis的jar包添加到路径中 -->
+<configuration>
+    <properties resource="db.properties"></properties>
+
+    <!--需要在前面配置-->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/><!--允许开启懒加载-->
+        <setting name="cacheEnabled" value="true" /><!--允许开启二级缓存-->
+    </settings>
+    <!--resource中填写上述配置文件db.properties文件的相对地址-->
+    <environments default="development"> <!-- 环境配置，可以配置多个环境，也就可以配置多个数据源（数据库） -->
+        <environment id="development">
+            <transactionManager type="JDBC"/><!-- 配置JDBC事物控制，由mybatis进行管理 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://120.79.249.199/mydb?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="username" value="cong"/>
+                <property name="password" value="lll111222"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 告诉mybatis加载映射文件的地址 -->
+    <mappers>
+        <mapper resource="com/MapperXml/ActivityMapper.xml" />
+        <mapper resource="com/MapperXml/AddressMapper.xml" />
+        <mapper resource="com/MapperXml/CommentMapper.xml" />
+        <mapper resource="com/MapperXml/HobbyMapper.xml" />
+        <mapper resource="com/MapperXml/DemandMapper.xml"/>
+        <mapper resource="com/MapperXml/PassageMapper.xml" />
+        <mapper resource="com/MapperXml/PhotoMapper.xml" />
+        <mapper resource="com/MapperXml/UsrsHasActivity1Mapper.xml" />
+        <mapper resource="com/MapperXml/UsrsMapper.xml" />
+        <mapper resource="com/MapperXml/VisitorMapper.xml" />
+        <mapper resource="com/MapperXml/EmailMapper.xml" />
+    </mappers>
+</configuration>

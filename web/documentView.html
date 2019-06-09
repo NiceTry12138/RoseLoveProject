@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="BootstrapResource/css/bootstrap.min.css">
+    <script src="BootstrapResource/js/bootstrap.min.js"></script>
+    <style>
+        form{
+            padding: 10px;
+            margin: 10px;
+        }
+            margin:20px 5px 20px 5px;
+        }
+        .myPage{
+            margin-top: 10px;
+        }
+        .myFrame{
+            border:#0f0f0f solid 1px;
+        }
+        .myPhotoImg
+        {
+
+            z-index:2;
+        }
+
+        .Mybutton{
+            background-color:rgba(250,118,131,1);
+            color: #ffffff;
+            border: #ffffff solid 1px;
+        }
+    </style>
+    <script>
+        function addHobby() {
+            var a = {1:"惬意海滩",2:"万水千山",3:"奔驰草原",4:"动作冒险片",5:"摄影",6:"爱情片",7:"每天落地成盒"};
+            for(var index in a){
+                console.log(a[index].length);
+
+                bootstrap = "col-md-" + parseInt( parseInt(a[index].length / 2 )+ 1.5) ;
+                if(a[index].length == 3){
+                    bootstrap = "col-md-3";
+                }
+
+                console.log(bootstrap)
+                var div = $("<div></div>").attr('class',bootstrap);
+
+                var t = $("<h5>"+a[index]+"</h5>").attr('class',"hoboy")
+                div.append(t);
+                $("#myHobby").append(div);
+            }
+        }
+    </script>
+</head>
+<body style="background-color: rgba(242,242,242,1)">
+<div style="height: 100px; background-color: rgba(250,118,131,1); ">
+    <br>
+    <div class="col-md-6 col-md-offset-2">
+        <img class="col-md-3  " src="img/logo3.png">
+        <img class="col-md-6  " src="img/logo2.png">
+    </div>
+    <div class="btn-group col-md-offset-1">
+        <button type="button" class="btn Mybutton">注册</button>
+        <button type="button" class="btn Mybutton">登录</button>
+    </div>
+</div>
+
+    <div class="col-md-12"><br><br></div>
+
+    <div >
+        <div  class="col-md-8 col-md-offset-2" style="height: 50px;">
+            <div class="container">
+            <div class="row">
+
+                <div class="col-md-5 ">
+                    <img class="col-md-8 myPhotoImg" style="width: 166px;" src="img/Headphoto.jpg"/>
+                    <a  class="col-md-4" href="#"  >大脸猫爱吃鱼</a>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2 myFrame" style="background-color:#ffffff;height: 160px;border-radius: 10px;">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-3"><p class="col-md-4">请输入爱情密码</p><input value="爱情密码"></div>
+            </div>
+            <div class="row">
+                        <div class="col-md-1">
+                    <br><br>
+                </div>
+                <div class="col-md-8  col-md-offset-2">
+                    <span class="col-md-1 glyphicon glyphicon-chevron-left">
+                    </span>
+                    <div class="col-md-10">
+                        <img src="img/Headphoto.jpg"  style="width: 88px">
+                        <img  src="img/Headphoto.jpg"  style="width: 88px" >
+                        <img  src="img/Headphoto.jpg"  style="width: 88px">
+                        <img  src="img/Headphoto.jpg"  style="width: 88px">
+                    </div>
+                    <span class="col-md-1 glyphicon glyphicon-chevron-right">
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 col-md-offset-1">
+                    <button class="btn btn-warning ">给我写信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12"><br><br></div>
+    <div class="col-md-8 col-md-offset-2 myFrame" style="background-color:#ffffff;border-radius: 10px;">
+        <div class="container myPage">
+            <div class="row">
+                <h3 class="col-md-4 col-md-offset-1" style="color: rgb(25,158,216)"> <b style="color: rgb(102,102,102)">|</b> 个人资料</h3>
+            </div>
+            <div class="row">
+                <table class="col-md-4 col-md-offset-1">
+                    <tr>
+                        <td>性别</td>
+                        <td>女</td>
+                    </tr>
+                    <tr>
+                        <td>星座</td>
+                        <td>双鱼座</td>
+                    </tr>
+                    <tr>
+                        <td>年龄</td>
+                        <td>30岁</td>
+                    </tr>
+                    <tr>
+                        <td>生日</td>
+                        <td>7月22日</td>
+                    </tr>
+                    <tr>
+                        <td>婚姻状况</td>
+                        <td>离婚</td>
+                    </tr>
+                </table>
+
+                <table class="col-md-4 col-md-offset-1">
+                    <tr>
+                        <td>身高</td>
+                        <td>165厘米</td>
+                    </tr>
+                    <tr>
+                        <td>学历</td>
+                        <td>本科</td>
+                    </tr>
+                    <tr>
+                        <td>收入</td>
+                        <td>3k元/月</td>
+                    </tr>
+                    <tr>
+                        <td>工作地区</td>
+                        <td>武汉</td>
+                    </tr>
+                    <tr>
+                        <td>性别</td>
+                        <td>女</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="container myPage">
+            <div class="row">
+                <h3 class="col-md-4 col-md-offset-1" style="color: rgb(25,158,216)"> <b style="color: rgb(102,102,102)">|</b> 兴趣爱好</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-1 col-md-8" id="myHobby">
+                    <!--<h5 class="hoboy col-md-2">惬意海滩</h5>-->
+                    <script>addHobby()</script>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container myPage">
+
+            <div class="row">
+                <h3 class="col-md-4 col-md-offset-1" style="color: rgb(25,158,216)"> <b style="color: rgb(102,102,102)">|</b> 择友要求</h3>
+            </div>
+            <div class="row">
+                <table class="col-md-4 col-md-offset-1">
+                    <tr>
+                        <td>性别</td>
+                        <td>不限</td>
+                    </tr>
+                    <tr>
+                        <td>年龄</td>
+                        <td>30岁-40岁</td>
+                    </tr>
+                    <tr>
+                        <td>婚姻状况</td>
+                        <td>未婚</td>
+                    </tr>
+                </table>
+
+                <table class="col-md-4 col-md-offset-1">
+                    <tr>
+                        <td>身高</td>
+                        <td>178厘米至189厘米</td>
+                    </tr>
+                    <tr>
+                        <td>学历</td>
+                        <td>高中及以上</td>
+                    </tr>
+                    <tr>
+                        <td>所在地区</td>
+                        <td>湖北宜昌</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="container myPage">
+            <div class="row">
+                <h3 class="col-md-4 col-md-offset-1" style="color: rgb(25,158,216)"> <b style="color: rgb(102,102,102)">|</b> 内心独白</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-1">
+                    <p>当你喜欢我的时候，我不喜欢你，当你爱上我的时候，我喜欢上你，当你离开我的时候，我却爱上你，是你走得太快，还是我跟不上你的脚步，我们错过了诺亚方舟，错过了泰坦尼克号，错过了一切的惊险与不惊险，我们还要继续错过。我不了解我的寂寞来自何方，但我真的感到寂寞。你也寂寞，世界上每个人都寂寞，只是大家的寂寞都不同吧。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12"><br><br></div>
+
+        <div class="col-md-12"><br><br></div>
+
+
+
+    </div>
+
+<div class="col-md-12"><br><br><br></div>
+
+
+</body>
+</html>

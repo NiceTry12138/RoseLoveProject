@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Address" >
+    <id column="AddressId" property="addressid" jdbcType="INTEGER" />
+    <result column="UsrCountry" property="usrcountry" jdbcType="VARCHAR" />
+    <result column="UsrProvince" property="usrprovince" jdbcType="VARCHAR" />
+    <result column="UsrCity" property="usrcity" jdbcType="VARCHAR" />
+    <result column="UsrEmail" property="usremail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AddressId, UsrCountry, UsrProvince, UsrCity, UsrEmail
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.AddressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Address
+    where AddressId = #{addressid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Address
+    where AddressId = #{addressid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.AddressExample" >
+    delete from Address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Address" >
+    insert into Address (AddressId, UsrCountry, UsrProvince, 
+      UsrCity, UsrEmail)
+    values (#{addressid,jdbcType=INTEGER}, #{usrcountry,jdbcType=VARCHAR}, #{usrprovince,jdbcType=VARCHAR}, 
+      #{usrcity,jdbcType=VARCHAR}, #{usremail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Address" >
+    insert into Address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addressid != null" >
+        AddressId,
+      </if>
+      <if test="usrcountry != null" >
+        UsrCountry,
+      </if>
+      <if test="usrprovince != null" >
+        UsrProvince,
+      </if>
+      <if test="usrcity != null" >
+        UsrCity,
+      </if>
+      <if test="usremail != null" >
+        UsrEmail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addressid != null" >
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="usrcountry != null" >
+        #{usrcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="usrprovince != null" >
+        #{usrprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="usrcity != null" >
+        #{usrcity,jdbcType=VARCHAR},
+      </if>
+      <if test="usremail != null" >
+        #{usremail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.AddressExample" resultType="java.lang.Integer" >
+    select count(*) from Address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Address
+    <set >
+      <if test="record.addressid != null" >
+        AddressId = #{record.addressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usrcountry != null" >
+        UsrCountry = #{record.usrcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrprovince != null" >
+        UsrProvince = #{record.usrprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrcity != null" >
+        UsrCity = #{record.usrcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usremail != null" >
+        UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Address
+    set AddressId = #{record.addressid,jdbcType=INTEGER},
+      UsrCountry = #{record.usrcountry,jdbcType=VARCHAR},
+      UsrProvince = #{record.usrprovince,jdbcType=VARCHAR},
+      UsrCity = #{record.usrcity,jdbcType=VARCHAR},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Address" >
+    update Address
+    <set >
+      <if test="usrcountry != null" >
+        UsrCountry = #{usrcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="usrprovince != null" >
+        UsrProvince = #{usrprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="usrcity != null" >
+        UsrCity = #{usrcity,jdbcType=VARCHAR},
+      </if>
+      <if test="usremail != null" >
+        UsrEmail = #{usremail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AddressId = #{addressid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Address" >
+    update Address
+    set UsrCountry = #{usrcountry,jdbcType=VARCHAR},
+      UsrProvince = #{usrprovince,jdbcType=VARCHAR},
+      UsrCity = #{usrcity,jdbcType=VARCHAR},
+      UsrEmail = #{usremail,jdbcType=VARCHAR}
+    where AddressId = #{addressid,jdbcType=INTEGER}
+  </update>
+</mapper>

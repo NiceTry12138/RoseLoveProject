@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.DemandMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Demand" >
+    <id column="DemandId" property="demandid" jdbcType="INTEGER" />
+    <result column="DemandSex" property="demandsex" jdbcType="VARCHAR" />
+    <result column="DemandMaritalstate" property="demandmaritalstate" jdbcType="VARCHAR" />
+    <result column="DemandEducation" property="demandeducation" jdbcType="VARCHAR" />
+    <result column="AddressId" property="addressid" jdbcType="INTEGER" />
+    <result column="UsrEmail" property="usremail" jdbcType="VARCHAR" />
+    <result column="DemandMinage" property="demandminage" jdbcType="INTEGER" />
+    <result column="DemandMaxage" property="demandmaxage" jdbcType="INTEGER" />
+    <result column="DemandHeight" property="demandheight" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DemandId, DemandSex, DemandMaritalstate, DemandEducation, AddressId, UsrEmail, DemandMinage, 
+    DemandMaxage, DemandHeight
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.DemandExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Demand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Demand
+    where DemandId = #{demandid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Demand
+    where DemandId = #{demandid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.DemandExample" >
+    delete from Demand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Demand" >
+    insert into Demand (DemandId, DemandSex, DemandMaritalstate, 
+      DemandEducation, AddressId, UsrEmail, 
+      DemandMinage, DemandMaxage, DemandHeight
+      )
+    values (#{demandid,jdbcType=INTEGER}, #{demandsex,jdbcType=VARCHAR}, #{demandmaritalstate,jdbcType=VARCHAR}, 
+      #{demandeducation,jdbcType=VARCHAR}, #{addressid,jdbcType=INTEGER}, #{usremail,jdbcType=VARCHAR}, 
+      #{demandminage,jdbcType=INTEGER}, #{demandmaxage,jdbcType=INTEGER}, #{demandheight,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Demand" >
+    insert into Demand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="demandid != null" >
+        DemandId,
+      </if>
+      <if test="demandsex != null" >
+        DemandSex,
+      </if>
+      <if test="demandmaritalstate != null" >
+        DemandMaritalstate,
+      </if>
+      <if test="demandeducation != null" >
+        DemandEducation,
+      </if>
+      <if test="addressid != null" >
+        AddressId,
+      </if>
+      <if test="usremail != null" >
+        UsrEmail,
+      </if>
+      <if test="demandminage != null" >
+        DemandMinage,
+      </if>
+      <if test="demandmaxage != null" >
+        DemandMaxage,
+      </if>
+      <if test="demandheight != null" >
+        DemandHeight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="demandid != null" >
+        #{demandid,jdbcType=INTEGER},
+      </if>
+      <if test="demandsex != null" >
+        #{demandsex,jdbcType=VARCHAR},
+      </if>
+      <if test="demandmaritalstate != null" >
+        #{demandmaritalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="demandeducation != null" >
+        #{demandeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="addressid != null" >
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="usremail != null" >
+        #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="demandminage != null" >
+        #{demandminage,jdbcType=INTEGER},
+      </if>
+      <if test="demandmaxage != null" >
+        #{demandmaxage,jdbcType=INTEGER},
+      </if>
+      <if test="demandheight != null" >
+        #{demandheight,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.DemandExample" resultType="java.lang.Integer" >
+    select count(*) from Demand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Demand
+    <set >
+      <if test="record.demandid != null" >
+        DemandId = #{record.demandid,jdbcType=INTEGER},
+      </if>
+      <if test="record.demandsex != null" >
+        DemandSex = #{record.demandsex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandmaritalstate != null" >
+        DemandMaritalstate = #{record.demandmaritalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandeducation != null" >
+        DemandEducation = #{record.demandeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressid != null" >
+        AddressId = #{record.addressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usremail != null" >
+        UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandminage != null" >
+        DemandMinage = #{record.demandminage,jdbcType=INTEGER},
+      </if>
+      <if test="record.demandmaxage != null" >
+        DemandMaxage = #{record.demandmaxage,jdbcType=INTEGER},
+      </if>
+      <if test="record.demandheight != null" >
+        DemandHeight = #{record.demandheight,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Demand
+    set DemandId = #{record.demandid,jdbcType=INTEGER},
+      DemandSex = #{record.demandsex,jdbcType=VARCHAR},
+      DemandMaritalstate = #{record.demandmaritalstate,jdbcType=VARCHAR},
+      DemandEducation = #{record.demandeducation,jdbcType=VARCHAR},
+      AddressId = #{record.addressid,jdbcType=INTEGER},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      DemandMinage = #{record.demandminage,jdbcType=INTEGER},
+      DemandMaxage = #{record.demandmaxage,jdbcType=INTEGER},
+      DemandHeight = #{record.demandheight,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Demand" >
+    update Demand
+    <set >
+      <if test="demandsex != null" >
+        DemandSex = #{demandsex,jdbcType=VARCHAR},
+      </if>
+      <if test="demandmaritalstate != null" >
+        DemandMaritalstate = #{demandmaritalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="demandeducation != null" >
+        DemandEducation = #{demandeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="addressid != null" >
+        AddressId = #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="usremail != null" >
+        UsrEmail = #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="demandminage != null" >
+        DemandMinage = #{demandminage,jdbcType=INTEGER},
+      </if>
+      <if test="demandmaxage != null" >
+        DemandMaxage = #{demandmaxage,jdbcType=INTEGER},
+      </if>
+      <if test="demandheight != null" >
+        DemandHeight = #{demandheight,jdbcType=REAL},
+      </if>
+    </set>
+    where DemandId = #{demandid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Demand" >
+    update Demand
+    set DemandSex = #{demandsex,jdbcType=VARCHAR},
+      DemandMaritalstate = #{demandmaritalstate,jdbcType=VARCHAR},
+      DemandEducation = #{demandeducation,jdbcType=VARCHAR},
+      AddressId = #{addressid,jdbcType=INTEGER},
+      UsrEmail = #{usremail,jdbcType=VARCHAR},
+      DemandMinage = #{demandminage,jdbcType=INTEGER},
+      DemandMaxage = #{demandmaxage,jdbcType=INTEGER},
+      DemandHeight = #{demandheight,jdbcType=REAL}
+    where DemandId = #{demandid,jdbcType=INTEGER}
+  </update>
+</mapper>

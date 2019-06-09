@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="RoseProj">
+    <output-path>$PROJECT_DIR$/out/artifacts/RoseProj</output-path>
+    <root id="archive" name="RoseProj.war">
+      <element id="javaee-facet-resources" facet="WebProject/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="WebProject" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,179 @@
+<head>
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        #claim div{
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(255,255,255); border-radius: 10px;">
+<div id="claim" style="margin-left: 10%; font-size: 20px;">
+    <div style="margin-top: 20px">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        <span>择友要求</span>
+        <hr>
+    </div>
+    <div>
+        <div>
+            <span style="margin-right: 35%; margin-left: 15%">性别</span>
+            <input type="radio" name="gender" value="男">男
+            <input type="radio" name="gender" value="女">女
+            <input type="radio" name="gender" value="不限">不限
+        </div>
+        <div>
+            <span style="margin-right: 35%; margin-left: 15%">年龄</span><select id="min_old"></select>至<select id="max_old"></select>
+        </div>
+        <div>
+            <span style="margin-right: 35%; margin-left: 15%">身高</span>
+            <select id="min_height">
+                <option value="130">不限</option>
+            </select>
+            至
+            <select id="max_height">
+                <option value="220">不限</option>
+            </select>
+        </div>
+        <div>
+            <span style="margin-right: 30%; margin-left: 15%">所在地区</span>
+            <select id="sheng" onchange="changeCity()">
+
+            </select>省
+            <select id="shi">
+
+            </select>市
+        </div>
+        <div>
+            <span style="margin-right: 35%; margin-left: 15%">学历</span>
+            <select id="education">
+                <option value="null">学历不限</option>
+                <option value="高中及以下">高中及以下</option>
+                <option value="中专">中专</option>
+                <option value="大专">大专</option>
+                <option value="大学本科">大学本科</option>
+                <option value="硕士">硕士</option>
+                <option value="博士">博士</option>
+            </select>
+        </div>
+
+        <div>
+            <span style="margin-right: 30%; margin-left: 15%">婚姻状况</span>
+            <input type="radio" name="bride" value="未婚">未婚
+            <input type="radio" name="bride" value="离婚">离婚
+            <input type="radio" name="bride" value="丧偶">丧偶
+        </div>
+    </div>
+    <div style="margin-left: 35%">
+        <button class="btn btn-Primary" style="width: 20%" id="save">保存</button>
+    </div>
+    <script>
+        var min_old = document.getElementById("min_old");
+        var max_old = document.getElementById("max_old");
+        for(var i=18; i<60; i++){
+            var text = document.createTextNode(i+"岁");
+            var option = document.createElement("option");
+            option.value = i;
+            option.appendChild(text);
+            min_old.appendChild(option);
+        }
+        for (var i=18; i<60; i++){
+            var text = document.createTextNode(i+"岁");
+            var option = document.createElement("option");
+            option.value = i;
+            option.appendChild(text);
+            max_old.appendChild(option);
+        }
+        var min_height = document.getElementById("min_height");
+        var max_height = document.getElementById("max_height");
+        for(var i=130; i<220; i++){
+            var text = document.createTextNode(i+"cm");
+            var option = document.createElement("option");
+            option.value = i;
+            option.appendChild(text);
+            min_height.appendChild(option);
+        }
+        for(var i=130; i<220; i++){
+            var text = document.createTextNode(i+"cm");
+            var option = document.createElement("option");
+            option.value = i;
+            option.appendChild(text);
+            max_height.appendChild(option);
+        }
+        $.getJSON("../city.json", function (result) {
+            var sheng = document.getElementById("sheng");
+            $.each(result, function (i, data) {
+                var option = document.createElement("option");
+                var test = document.createTextNode(data.name);
+                option.value = data.name;
+                option.appendChild(test);
+                sheng.appendChild(option);
+            })
+        });
+        function changeCity() {
+            var shi = document.getElementById("shi");
+            var sheng = document.getElementById("sheng");
+            shi.innerHTML = "";
+            var name = sheng.options[sheng.selectedIndex].value;
+            $.getJSON("../city.json", function (result) {
+                $.each(result, function (i, data) {
+                    if(data.name == name){
+                        $.each(data.city, function (i2, data2) {
+                            var option = document.createElement("option");
+                            var test = document.createTextNode(data2.name);
+                            option.value = data2.name;
+                            option.appendChild(test);
+                            shi.appendChild(option);
+                        })
+                    }
+                })
+            })
+        }
+        function updateClaim(url, mail) {
+
+            var gender = $("input[name='gender']:checked").val();//回显性别;
+            var min_old = $("#min_old option:selected").val();
+            var max_old = $("#max_old option:selected").val();
+            var min_height = $("#min_height option:selected").val();
+            var max_height = $("#max_height option:selected").val();
+            var education = $("#education option:selected").val();
+            var bride = $("input[name='bride']:checked").val();
+
+            var theData = {
+                "mail" : mail,
+                "gender" : gender,
+                "minOld" : min_old,
+                "maxOld" : max_old,
+                "minHeight" : min_height,
+                "maxHeight" : max_height,
+                "education" : education,
+                "bride" : bride
+            };
+            alert("开始更新");
+            $.ajax({
+                url : url,
+                data : theData,
+                type : "POST",
+                success : function (result) {
+                    console.log(result);
+                    alert("更新成功");
+                },
+                error : function (error) {
+                    console.log(error);
+                    alert("更新失败请稍后再试");
+                }
+            })
+        }
+    </script>
+</div>
+</body>

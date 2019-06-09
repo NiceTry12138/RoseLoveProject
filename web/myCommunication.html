@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交友论坛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="BootstrapResource/css/bootstrap.min.css">
+    <script src="BootstrapResource/js/bootstrap.min.js"></script>
+
+    <style>
+        .head-font
+        {
+            font-size: 15px;
+            color:#0f0f0f;
+            font-weight:400;
+            font-family: 微软雅黑;
+        }
+        .essay-font
+        {
+            line-height: 26px;
+            font-size: 12px;
+            color:#0f0f0f;
+            font-weight:400;
+            font-family: 微软雅黑;
+        }
+        .essay-font:hover
+        {
+            line-height: 26px;
+            font-size: 12px;
+            color:#0f0f0f;
+            font-weight:400;
+            font-family: 微软雅黑;
+        }
+        .myButton
+        {
+            background-color:rgba(250,118,131,1);
+            color: #ffffff;
+            border: #ffffff solid 1px;
+        }
+        .myImage
+        {
+            opacity: 1;
+        }
+        .MyTextA
+        {
+            opacity: 0;
+        }
+        .MyTextB
+        {
+            text-decoration-line: none;
+        }
+        .DaLaoTianXiu:hover .myImage{
+            opacity: 0.5;
+        }
+        .DaLaoTianXiu:hover .MyTextA{
+            opacity: 1;
+        }
+        .DaLaoTianXiu:hover .MyTextB
+        {
+            text-decoration-line: underline;
+        }
+        .MyButton
+        {
+            background-color:rgb(250,118,131);
+            color: #ffffff;
+            border: #ffffff solid 1px;
+        }
+        a:hover
+        {
+            text-decoration-line: none;
+            color: rgb(250,118,131);;
+        }
+    </style>
+
+    <script>
+        //loadPage：加载切换页面的按钮
+        function loadPage(result)
+        {
+            var ul = $("<ul class='pagination'></ul>");
+            var li1 = $("<li></li>").append($("<a>" +"<span aria-hidden=\"true\">首页</span>" + "</a>"))
+            var li2 = $("<li></li>").append($("<a aria-label=\"Previous\">" + "<span aria-hidden=\"true\">&laquo;</span>" + "</a>"));
+            var li3 = $("<li></li>").append($("<a aria-label=\"Previous\">" + "<span aria-hidden=\"true\">&raquo;</span>" + "</a>"));
+            var li4 = $("<li></li>").append($("<a>" + "<span aria-hidden=\"true\">末页</span>" + "</a>"));
+            ul.append(li1);
+            ul.append(li2);
+            // li1.click(function () {
+            //         toPage(1); // 首页
+            //     }
+            // )
+            // li2.click(function () {
+            //         if(result.extend.activity.pageNum  - 1 >= 1)
+            //             toPage(result.extend.activity.pageNum  - 1);
+            //     }
+            // )
+            //
+            // li3.click(function () {
+            //         if(result.extend.activity.pageNum  - 1 <= result.extend.activity.pages )
+            //             toPage(result.extend.activity.pageNum  + 1);
+            //     }
+            // )
+            // li4.click(function () {
+            //         toPage(result.extend.activity.pages); // 末页
+            //     }
+            // )
+
+            //
+            // var firstPage = result.extend.activity.firstPage;
+            // var now = result.extend.activity.pageNum;
+            //
+            // var lastPage = result.extend.activity.lastPage;
+            // // console.log("before")
+            // for(var index = firstPage; index  <= lastPage ;index ++){
+            //     // console.log(index);
+            //     var liitems = $("<li><a>" + (index)  + "</a></li>");
+            //     liitems.attr("page",index);
+            //     if (index == now) {
+            //         liitems.addClass("active");
+            //     }
+            //     liitems.click(function () {
+            //         // alert($(this).attr("page"))
+            //         toPage($(this).attr("page"));
+            //     });
+            //     ul.append(liitems);
+            // }
+            ul.append(li3);
+            ul.append(li4);
+            $("#pageNav").append(ul);
+        }
+        //createEssayWithInfo：调用该函数以根据所给信息增加一个文章板块。
+        function createEssayWithInfo(havePic, imageSrc, essayStr, dateStr, themeStr)
+        {
+            var divBootStrap1 = $("<div class='col-md-4'></div>");
+            var divPadding2 = $("<div style='width: 254px; height: 380px;'></div>");
+            var divBackground3 = $("<div style='background-color: #ffffff; width: 234px; height: 360px; margin: 10px'></div>");
+            var divTouch4 = $("<div class='DaLaoTianXiu' style='width: 234px; height: 290px;'></div>");
+            var divPadding5 = $("<div style='width: 194px; height: 250px; padding-top: 20px; position: relative;'></div>");
+            var imgImage6 = $("<img class='myImage' style='width: 194px; height: 250px;'/>").attr('src', imageSrc);
+            var classStr = havePic ? 'MyTextA' : 'MyTextB';
+            var divEssay6 = $("<div style='width: 184px; height: 240px; position: absolute; top: 25px; left: 5px;'></div>").attr('class', classStr);
+            var divEssayA7 = $("<a class='essay-font' href='./concreteArticle.html'></a>");
+            divEssayA7.append(essayStr);
+            var divLine4 = $("<div style='padding-left: 20px; padding-right: 20px'></div>");
+            var divDate5 = $("<div style='float: left; color: rgb(153,153,153);'></div>");
+            divDate5.append(dateStr);
+            var divRead5 = $("<div style='text-align: right'><a href='./concreteArticle.html'>[阅读全文]</a></div>");
+            var divTheme4 = $("<div style='padding-left: 20px; padding-right: 20px; text-align: center; line-height: 45px'></div>");
+            divTheme4.append(themeStr);
+            divEssay6.append(divEssayA7);
+            if(havePic) divPadding5.append(imgImage6);
+            divPadding5.append(divEssay6);
+            divTouch4.append(divPadding5);
+            divLine4.append(divDate5).append(divRead5);
+            divBackground3.append(divTouch4).append(divLine4).append(divTheme4);
+            divPadding2.append(divBackground3);
+            divBootStrap1.append(divPadding2);
+            $("#BoardDiv").append(divBootStrap1);
+        }
+        //createEssay：在该函数中处理信息，添加文章。
+        function createEssay(result)
+        {
+            //////////////////////////////此处填入数据//////////////////////////////
+            for(var i = 0 ;i < 6 ;i ++)
+            {
+                /*文章封面地址*/
+                var imageSrc = "img/ArticlePicture.jpg";
+                /*文章内容*/
+                var essayStr = "我们的故事，没浪漫，没有新奇。我是有心在佳缘上注册寻觅，他是闲来无聊注册了一下。我搜到的他，在佳缘网上几次沟通后转到QQ聊天。表达了几点各方的观点和条件后，决定见面。见面头一回，并没有给对方留下特别的印象，我带着六岁的女儿一起……<br>——————————————";
+                /*文章发表日期*/
+                var dateStr = "2019-2-3";
+                /*文章标题*/
+                var themeStr = "《许你一城星河许你一城》";
+                /*文章是否有封面*/
+                var havePic = (i % 2 == 0);
+                createEssayWithInfo(havePic, imageSrc, essayStr, dateStr, themeStr);
+            }
+            //////////////////////////////此处填入数据//////////////////////////////
+        }
+    </script>
+</head>
+
+<body style="background-color: rgb(246,246,246);">
+    <!--标头-->
+    <div style="padding-bottom: 5%; background-color: rgb(250,118,131); ">
+        <br>
+        <div style="text-align: right;">
+            <button type="button" class="btn myButton" onclick = "window.location.href = 'register.html'">注册</button>
+            <button type="button" class="btn myButton" style="margin-right: 30px;" onclick = "window.location.href = 'login.html'">登录</button>
+        </div>
+        <div style="text-align: center;">
+            <img style="height: auto; width: 70%;" src="img/logo1.png">
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!--导航栏-->
+        <div class="row">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#example-navbar-collapse">
+                            <span class="sr-only">切换导航</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand head-link" href="index.html">Rose在线情缘</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                        <ul class="nav navbar-nav col-md-10" style="text-align: center">
+                            <li class="col-md-2 col-md-offset-1"><a class="head-font" href="index.html">首页</a></li>
+                            <li class="col-md-2"><a class="head-font" href="search.html">搜索</a></li>
+                            <li class="active col-md-2"><a class="head-font" href="communication.html">交友论坛</a></li>
+                            <li class="col-md-2"><a class="head-font" href="activity.html">活动</a></li>
+                            <li class="col-md-2"><a class="head-font" href="personnal.html">个人中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!--轮播图-->
+        <div class="row">
+            <div id="myCarousel" class="carousel slide col-md-8 col-md-offset-2">
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="img/advertisement1.png" alt="First slide">
+                    </div>
+                    <div class="item">
+                        <img src="img/advertisement2.png" alt="Second slide">
+                    </div>
+                    <div class="item">
+                        <img src="img/advertisement3.png" alt="Third slide">
+                    </div>
+                     <!--轮播（Carousel）导航-->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div style="background-color: #ffffff; line-height: 40px; padding-left: 20px; padding-right: 20px">
+                    <div style="float: left">W R I T E H E R E</div>
+                    <div style="text-align: right">
+                        <a href="./addArticle.html">发布文章</a>
+                        <a href="./communication.html">全部文章</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="height: 20px;">
+        </div>
+
+        <!--文章-->
+        <div class="row" align="center">
+            <div class="col-md-10 col-md-offset-1" id="BoardDiv">
+            </div>
+        </div>
+        <script>
+            createEssay({});
+        </script>
+
+        <!--上下翻页-->
+        <div class="row" align="center">
+            <nav aria-label="Page navigation" id="pageNav">
+            </nav>
+        </div>
+        <script>
+            loadPage({});
+        </script>
+    </div>
+</body>
+</html>

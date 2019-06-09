@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.PassageMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Passage" >
+    <id column="PassageId" property="passageid" jdbcType="INTEGER" />
+    <result column="PassageUsername" property="passageusername" jdbcType="VARCHAR" />
+    <result column="PassageSendtime" property="passagesendtime" jdbcType="TIMESTAMP" />
+    <result column="PassageState" property="passagestate" jdbcType="VARCHAR" />
+    <result column="UsrEmail" property="usremail" jdbcType="VARCHAR" />
+    <result column="PassageContent" property="passagecontent" jdbcType="VARCHAR" />
+    <result column="PassageName" property="passagename" jdbcType="VARCHAR" />
+    <result column="PassageIfdeleted" property="passageifdeleted" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.Pojo.Passage" extends="BaseResultMap" >
+    <result column="PassagePic" property="passagepic" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PassageId, PassageUsername, PassageSendtime, PassageState, UsrEmail, PassageContent, 
+    PassageName, PassageIfdeleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    PassagePic
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.Pojo.PassageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Passage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.PassageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Passage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Passage
+    where PassageId = #{passageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Passage
+    where PassageId = #{passageid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.PassageExample" >
+    delete from Passage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Passage" >
+    insert into Passage (PassageId, PassageUsername, PassageSendtime, 
+      PassageState, UsrEmail, PassageContent, 
+      PassageName, PassageIfdeleted, PassagePic
+      )
+    values (#{passageid,jdbcType=INTEGER}, #{passageusername,jdbcType=VARCHAR}, #{passagesendtime,jdbcType=TIMESTAMP}, 
+      #{passagestate,jdbcType=VARCHAR}, #{usremail,jdbcType=VARCHAR}, #{passagecontent,jdbcType=VARCHAR}, 
+      #{passagename,jdbcType=VARCHAR}, #{passageifdeleted,jdbcType=VARCHAR}, #{passagepic,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Passage" >
+    insert into Passage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="passageid != null" >
+        PassageId,
+      </if>
+      <if test="passageusername != null" >
+        PassageUsername,
+      </if>
+      <if test="passagesendtime != null" >
+        PassageSendtime,
+      </if>
+      <if test="passagestate != null" >
+        PassageState,
+      </if>
+      <if test="usremail != null" >
+        UsrEmail,
+      </if>
+      <if test="passagecontent != null" >
+        PassageContent,
+      </if>
+      <if test="passagename != null" >
+        PassageName,
+      </if>
+      <if test="passageifdeleted != null" >
+        PassageIfdeleted,
+      </if>
+      <if test="passagepic != null" >
+        PassagePic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="passageid != null" >
+        #{passageid,jdbcType=INTEGER},
+      </if>
+      <if test="passageusername != null" >
+        #{passageusername,jdbcType=VARCHAR},
+      </if>
+      <if test="passagesendtime != null" >
+        #{passagesendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passagestate != null" >
+        #{passagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="usremail != null" >
+        #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="passagecontent != null" >
+        #{passagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="passagename != null" >
+        #{passagename,jdbcType=VARCHAR},
+      </if>
+      <if test="passageifdeleted != null" >
+        #{passageifdeleted,jdbcType=VARCHAR},
+      </if>
+      <if test="passagepic != null" >
+        #{passagepic,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.PassageExample" resultType="java.lang.Integer" >
+    select count(*) from Passage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Passage
+    <set >
+      <if test="record.passageid != null" >
+        PassageId = #{record.passageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.passageusername != null" >
+        PassageUsername = #{record.passageusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passagesendtime != null" >
+        PassageSendtime = #{record.passagesendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.passagestate != null" >
+        PassageState = #{record.passagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usremail != null" >
+        UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passagecontent != null" >
+        PassageContent = #{record.passagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passagename != null" >
+        PassageName = #{record.passagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passageifdeleted != null" >
+        PassageIfdeleted = #{record.passageifdeleted,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passagepic != null" >
+        PassagePic = #{record.passagepic,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update Passage
+    set PassageId = #{record.passageid,jdbcType=INTEGER},
+      PassageUsername = #{record.passageusername,jdbcType=VARCHAR},
+      PassageSendtime = #{record.passagesendtime,jdbcType=TIMESTAMP},
+      PassageState = #{record.passagestate,jdbcType=VARCHAR},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      PassageContent = #{record.passagecontent,jdbcType=VARCHAR},
+      PassageName = #{record.passagename,jdbcType=VARCHAR},
+      PassageIfdeleted = #{record.passageifdeleted,jdbcType=VARCHAR},
+      PassagePic = #{record.passagepic,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Passage
+    set PassageId = #{record.passageid,jdbcType=INTEGER},
+      PassageUsername = #{record.passageusername,jdbcType=VARCHAR},
+      PassageSendtime = #{record.passagesendtime,jdbcType=TIMESTAMP},
+      PassageState = #{record.passagestate,jdbcType=VARCHAR},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      PassageContent = #{record.passagecontent,jdbcType=VARCHAR},
+      PassageName = #{record.passagename,jdbcType=VARCHAR},
+      PassageIfdeleted = #{record.passageifdeleted,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Passage" >
+    update Passage
+    <set >
+      <if test="passageusername != null" >
+        PassageUsername = #{passageusername,jdbcType=VARCHAR},
+      </if>
+      <if test="passagesendtime != null" >
+        PassageSendtime = #{passagesendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passagestate != null" >
+        PassageState = #{passagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="usremail != null" >
+        UsrEmail = #{usremail,jdbcType=VARCHAR},
+      </if>
+      <if test="passagecontent != null" >
+        PassageContent = #{passagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="passagename != null" >
+        PassageName = #{passagename,jdbcType=VARCHAR},
+      </if>
+      <if test="passageifdeleted != null" >
+        PassageIfdeleted = #{passageifdeleted,jdbcType=VARCHAR},
+      </if>
+      <if test="passagepic != null" >
+        PassagePic = #{passagepic,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where PassageId = #{passageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.Pojo.Passage" >
+    update Passage
+    set PassageUsername = #{passageusername,jdbcType=VARCHAR},
+      PassageSendtime = #{passagesendtime,jdbcType=TIMESTAMP},
+      PassageState = #{passagestate,jdbcType=VARCHAR},
+      UsrEmail = #{usremail,jdbcType=VARCHAR},
+      PassageContent = #{passagecontent,jdbcType=VARCHAR},
+      PassageName = #{passagename,jdbcType=VARCHAR},
+      PassageIfdeleted = #{passageifdeleted,jdbcType=VARCHAR},
+      PassagePic = #{passagepic,jdbcType=LONGVARBINARY}
+    where PassageId = #{passageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Passage" >
+    update Passage
+    set PassageUsername = #{passageusername,jdbcType=VARCHAR},
+      PassageSendtime = #{passagesendtime,jdbcType=TIMESTAMP},
+      PassageState = #{passagestate,jdbcType=VARCHAR},
+      UsrEmail = #{usremail,jdbcType=VARCHAR},
+      PassageContent = #{passagecontent,jdbcType=VARCHAR},
+      PassageName = #{passagename,jdbcType=VARCHAR},
+      PassageIfdeleted = #{passageifdeleted,jdbcType=VARCHAR}
+    where PassageId = #{passageid,jdbcType=INTEGER}
+  </update>
+</mapper>

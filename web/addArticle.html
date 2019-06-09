@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加文章</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="BootstrapResource/css/bootstrap.min.css">
+    <script src="BootstrapResource/js/bootstrap.min.js"></script>
+
+    <style>
+        form
+        {
+            padding: 10px;
+            margin: 10px;
+        }
+        .redTag-font
+        {
+            font-size: 15px;
+            color: red;
+            font-weight: bold;
+        }
+        .myButton
+        {
+            background-color:rgb(250,118,131);
+            color: #ffffff;
+            border: #ffffff solid 1px;
+        }
+    </style>
+    <script>
+        function loadAuthor()
+        {
+            //////////////////////////////此处填入数据//////////////////////////////
+            /*作者名*/
+            var authorStr = "大脸猫爱吃鱼rose";
+            //////////////////////////////此处填入数据//////////////////////////////
+            $("#author").append(authorStr);
+        }
+        function checkNum(num)
+        {
+            var maxLen = [10, 2000];
+            var id = ["PassageName", "PassageContent"];
+            var textDom = document.getElementById(id[num]);
+            if(textDom.value.length > maxLen[num])
+                textDom.value = textDom.value.substring(0, maxLen[num]);
+        }
+        function onSubmit()
+        {
+            var i;
+            var id = ["PassageName", "PassageContent"];
+            var alertStr = ["文章标题不能为空", "文章内容不能为空"];
+            for(i = 0; i <= 1; i ++)
+                checkNum(i);
+            for(i = 0; i <= 1; i ++)
+            {
+                var textDom = document.getElementById(id[i]);
+                if (textDom.value == "")
+                {
+                    alert(alertStr[i]);
+                    textDom.focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</head>
+<body style="background-image: url('img/bg_1.png'); background-repeat: repeat">
+<!--标头-->
+<div style="padding-bottom: 5%; background-color: rgb(250,118,131); ">
+    <br>
+    <div style="text-align: right;">
+        <button type="button" class="btn myButton" onclick = "window.location.href = 'register.html'">注册</button>
+        <button type="button" class="btn myButton" style="margin-right: 30px;" onclick = "window.location.href = 'login.html'">登录</button>
+    </div>
+    <div style="text-align: left; padding-left: 10%">
+        <a href="index.html"><img style="" src="img/logo.png"></a>
+    </div>
+</div>
+<div class="row"><br></div>
+<div class="container">
+        <div class="col-md-10 col-md-offset-1 modal-content">
+            <div class="modal-header">
+                <div class="col-md-12" style="background-color: rgb(228,228,228);line-height: 48px; border-radius: 5px;">
+                    <div>
+                        <div class="col-md-8" style="text-align: left">作者 <a id = "author" href="documentView.html"></a></div>
+                        <div class="col-md-4" style="text-align: right"><a href="communication.html">返回论坛首页</a></div>
+                    </div>
+                </div>
+                <script>
+                    loadAuthor();
+                </script>
+            </div>
+            <div class="modal-body">
+                <form class="col-md-10 col-md-offset-1" onsubmit="return onSubmit()">
+                    <div class="form-group col-md-12">
+                        <div class="col-md-12" style="line-height: 48px;">
+                            <label>标题<span class="redTag-font">*</span></label>
+                            <input type="text" name="PassageName" id="PassageName" class="form-control" oninput="checkNum(0)" placeholder="请输入标题">
+                            <b>文章封面（194x250）</b>
+                            <input type="file" name="PassagePic" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="height: 1px;"></div>
+                    <div class="form-group col-md-12">
+                        <label for="PassageContent" class="col-md-2 control-label">文章描述<span class="redTag-font">*</span></label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" name="PassageContent" id="PassageContent" oninput="checkNum(1)" style="height: 800px; resize: none"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="height: 20px;"></div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <input type="submit" value="提交" class="btn btn-primary">
+                    </div>
+                    <div class="col-md-12" style="height: 20px;"></div>
+                </form>
+            </div>
+        </div>
+    <div class="row"><div class="col-md-12"  style="height: 100px;"></div></div>
+</div>
+</body>
+</html>

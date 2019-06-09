@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+    http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- 上述为约束，必须带有 -->
+    <!-- Spring入门的配置 -->
+    <!-- 开启注解扫描 -->
+    <context:annotation-config />
+    <context:property-placeholder location="classpath*:db.properties" /> <!--加载文件-->
+    <!--创建数据源-->
+    <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+        <!--驱动类名 -->
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <!-- url -->
+        <property name="url" value="${jdbc.url}" />
+        <!-- 用户名 -->
+        <property name="username" value="${jdbc.uid}" />
+        <!-- 密码 -->
+        <property name="password" value="${jdbc.pwd}" />
+        <!--最大链接-->
+        <property name="maxActive" value="10"/>
+        <!--最大空闲数-->
+        <property name="maxIdle" value="5" />
+    </bean>
+
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource" />
+<!--        <property name="mapperLocations" value="classpath:com/MapperXml/*.xml" />-->
+        <property name="configLocation" value="classpath:SqlMapConfig.xml" />
+    </bean>
+
+    <!--配置mapper接口的扫描-->
+    <!--类id为 类名首字母小写-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.Mapper" />
+    </bean>
+    <!--开启SpringIOC注解扫描-->
+    <context:component-scan base-package="com" />
+
+    <!--&lt;!&ndash;开启Spring的事务管理&ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" value="datasource" />-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;启用Spring的事务注解&ndash;&gt;-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <!--&lt;!&ndash;在类上加上 @Transactional&ndash;&gt;-->
+
+</beans>
+

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.VisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Visitor" >
+    <id column="VisitimformationId" property="visitimformationid" jdbcType="INTEGER" />
+    <result column="VisitorEmail" property="visitoremail" jdbcType="VARCHAR" />
+    <result column="VisitorName" property="visitorname" jdbcType="VARCHAR" />
+    <result column="VisitorTime" property="visitortime" jdbcType="TIMESTAMP" />
+    <result column="UsrEmail" property="usremail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    VisitimformationId, VisitorEmail, VisitorName, VisitorTime, UsrEmail
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.VisitorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Visitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Visitor
+    where VisitimformationId = #{visitimformationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Visitor
+    where VisitimformationId = #{visitimformationid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.VisitorExample" >
+    delete from Visitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Visitor" >
+    insert into Visitor (VisitimformationId, VisitorEmail, 
+      VisitorName, VisitorTime, UsrEmail
+      )
+    values (#{visitimformationid,jdbcType=INTEGER}, #{visitoremail,jdbcType=VARCHAR}, 
+      #{visitorname,jdbcType=VARCHAR}, #{visitortime,jdbcType=TIMESTAMP}, #{usremail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Visitor" >
+    insert into Visitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="visitimformationid != null" >
+        VisitimformationId,
+      </if>
+      <if test="visitoremail != null" >
+        VisitorEmail,
+      </if>
+      <if test="visitorname != null" >
+        VisitorName,
+      </if>
+      <if test="visitortime != null" >
+        VisitorTime,
+      </if>
+      <if test="usremail != null" >
+        UsrEmail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="visitimformationid != null" >
+        #{visitimformationid,jdbcType=INTEGER},
+      </if>
+      <if test="visitoremail != null" >
+        #{visitoremail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorname != null" >
+        #{visitorname,jdbcType=VARCHAR},
+      </if>
+      <if test="visitortime != null" >
+        #{visitortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usremail != null" >
+        #{usremail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.VisitorExample" resultType="java.lang.Integer" >
+    select count(*) from Visitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Visitor
+    <set >
+      <if test="record.visitimformationid != null" >
+        VisitimformationId = #{record.visitimformationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.visitoremail != null" >
+        VisitorEmail = #{record.visitoremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorname != null" >
+        VisitorName = #{record.visitorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitortime != null" >
+        VisitorTime = #{record.visitortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usremail != null" >
+        UsrEmail = #{record.usremail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Visitor
+    set VisitimformationId = #{record.visitimformationid,jdbcType=INTEGER},
+      VisitorEmail = #{record.visitoremail,jdbcType=VARCHAR},
+      VisitorName = #{record.visitorname,jdbcType=VARCHAR},
+      VisitorTime = #{record.visitortime,jdbcType=TIMESTAMP},
+      UsrEmail = #{record.usremail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Visitor" >
+    update Visitor
+    <set >
+      <if test="visitoremail != null" >
+        VisitorEmail = #{visitoremail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorname != null" >
+        VisitorName = #{visitorname,jdbcType=VARCHAR},
+      </if>
+      <if test="visitortime != null" >
+        VisitorTime = #{visitortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usremail != null" >
+        UsrEmail = #{usremail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VisitimformationId = #{visitimformationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Visitor" >
+    update Visitor
+    set VisitorEmail = #{visitoremail,jdbcType=VARCHAR},
+      VisitorName = #{visitorname,jdbcType=VARCHAR},
+      VisitorTime = #{visitortime,jdbcType=TIMESTAMP},
+      UsrEmail = #{usremail,jdbcType=VARCHAR}
+    where VisitimformationId = #{visitimformationid,jdbcType=INTEGER}
+  </update>
+</mapper>

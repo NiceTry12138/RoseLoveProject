@@ -1,0 +1,112 @@
+<head>
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body style=" rgb(255,255,255); border-radius: 10px;">
+<div style="margin-left: 10%; font-size: 20px;">
+    <div style="margin-top: 20px">
+        <span class="glyphicon glyphicon-cog"></span>
+        <span>系统设置</span>
+        <hr>
+    </div>
+    <div>
+        <div>
+            浏览相册权限
+        </div>
+        <div>
+            <input type="radio" name="see" value="所有人可见">所有人可见<br><br>
+            <input type="radio" name="see" value="所有会员可见">所有会员可见<br><br>
+            <input type="radio" name="see" value="所有人不可见">所有人不可见<br><br>
+            <input type="radio" name="see" value="需要爱情密码">需要爱情密码<br><br>
+        </div>
+        <div>
+            <button class="btn btn-Primary" style="width: 20%" id="photoState">保存</button>
+        </div>
+    </div>
+    <hr>
+    <div style="margin-top: 20px">
+        <span class="glyphicon glyphicon-cog"></span>
+        <span>修改登录密码</span>
+    </div>
+    <div>
+        邮&nbsp;&nbsp;&nbsp;箱：<span id="mail"></span><br><br>
+        验证码:<input type="text" id="vcode"> <button class="btn btn-default" id="sendmail">立即验证</button><br><br>
+        新密码:<input type="text" id="newpwd"><br><br>
+        <div>
+            <button class="btn btn-Primary" style="width: 20%" id="load">保存</button>
+        </div>
+    </div>
+
+    <script>
+        var sendmail = document.getElementById("sendmail");
+        var load = document.getElementById("load");
+        function sendMail(url, mail) {
+            var theDate = {"mail":mail}
+            $.ajax({
+                url : url,
+                data : theDate,
+                success : function (result) {
+                    alert("发送成功");
+                },
+                error : function (error) {
+                    alert("发送失败");
+                }
+            })
+        }
+        function updatePasswd(url, mail) {
+            var vcode = document.getElementById("vcode").value;
+            var newpwd = document.getElementById("newpwd").value;
+            if (newpwd == "" || newpwd == null){
+                alert("新密码不能为空");
+                return;
+            }
+            var theDate = {"mail":mail, "vcode":vcode, "passwd":newpwd};
+            $.ajax({
+                url : url,
+                data : theDate,
+                type : "POST",
+                success : function (result) {
+                    alert("更新成功");
+                },
+                error : function (error) {
+                    alert("更新失败");
+                }
+            });
+        }
+        function updatePhotoState(url, mail) {
+
+            var photoState = $("input[name='see']:checked").val();
+            console.log(photoState);
+            var theData = {
+                "mail" : mail,
+                "photoState" : photoState
+            };
+            $.ajax({
+                url : url,
+                type:"POST",
+                data : theData,
+                success : function (result) {
+                    console.log(result);
+                    alert("更新成功");
+                },
+                error : function (error) {
+                    console.log(error);
+                    alert("更新失败");
+                }
+            })
+        }
+    </script>
+</div>
+</body>

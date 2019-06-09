@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.Pojo.Comment" >
+    <id column="CommentId" property="commentid" jdbcType="INTEGER" />
+    <result column="CommentContent" property="commentcontent" jdbcType="VARCHAR" />
+    <result column="CommentTime" property="commenttime" jdbcType="TIMESTAMP" />
+    <result column="CommentPeoplename" property="commentpeoplename" jdbcType="VARCHAR" />
+    <result column="CommentState" property="commentstate" jdbcType="VARCHAR" />
+    <result column="PassageId" property="passageid" jdbcType="INTEGER" />
+    <result column="CommentIfdeleted" property="commentifdeleted" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CommentId, CommentContent, CommentTime, CommentPeoplename, CommentState, PassageId, 
+    CommentIfdeleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.Pojo.CommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Comment
+    where CommentId = #{commentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Comment
+    where CommentId = #{commentid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Pojo.CommentExample" >
+    delete from Comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.Pojo.Comment" >
+    insert into Comment (CommentId, CommentContent, CommentTime, 
+      CommentPeoplename, CommentState, PassageId, 
+      CommentIfdeleted)
+    values (#{commentid,jdbcType=INTEGER}, #{commentcontent,jdbcType=VARCHAR}, #{commenttime,jdbcType=TIMESTAMP}, 
+      #{commentpeoplename,jdbcType=VARCHAR}, #{commentstate,jdbcType=VARCHAR}, #{passageid,jdbcType=INTEGER}, 
+      #{commentifdeleted,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.Pojo.Comment" >
+    insert into Comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        CommentId,
+      </if>
+      <if test="commentcontent != null" >
+        CommentContent,
+      </if>
+      <if test="commenttime != null" >
+        CommentTime,
+      </if>
+      <if test="commentpeoplename != null" >
+        CommentPeoplename,
+      </if>
+      <if test="commentstate != null" >
+        CommentState,
+      </if>
+      <if test="passageid != null" >
+        PassageId,
+      </if>
+      <if test="commentifdeleted != null" >
+        CommentIfdeleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="commentcontent != null" >
+        #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="commenttime != null" >
+        #{commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentpeoplename != null" >
+        #{commentpeoplename,jdbcType=VARCHAR},
+      </if>
+      <if test="commentstate != null" >
+        #{commentstate,jdbcType=VARCHAR},
+      </if>
+      <if test="passageid != null" >
+        #{passageid,jdbcType=INTEGER},
+      </if>
+      <if test="commentifdeleted != null" >
+        #{commentifdeleted,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Pojo.CommentExample" resultType="java.lang.Integer" >
+    select count(*) from Comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Comment
+    <set >
+      <if test="record.commentid != null" >
+        CommentId = #{record.commentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentcontent != null" >
+        CommentContent = #{record.commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commenttime != null" >
+        CommentTime = #{record.commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commentpeoplename != null" >
+        CommentPeoplename = #{record.commentpeoplename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentstate != null" >
+        CommentState = #{record.commentstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passageid != null" >
+        PassageId = #{record.passageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentifdeleted != null" >
+        CommentIfdeleted = #{record.commentifdeleted,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Comment
+    set CommentId = #{record.commentid,jdbcType=INTEGER},
+      CommentContent = #{record.commentcontent,jdbcType=VARCHAR},
+      CommentTime = #{record.commenttime,jdbcType=TIMESTAMP},
+      CommentPeoplename = #{record.commentpeoplename,jdbcType=VARCHAR},
+      CommentState = #{record.commentstate,jdbcType=VARCHAR},
+      PassageId = #{record.passageid,jdbcType=INTEGER},
+      CommentIfdeleted = #{record.commentifdeleted,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Pojo.Comment" >
+    update Comment
+    <set >
+      <if test="commentcontent != null" >
+        CommentContent = #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="commenttime != null" >
+        CommentTime = #{commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentpeoplename != null" >
+        CommentPeoplename = #{commentpeoplename,jdbcType=VARCHAR},
+      </if>
+      <if test="commentstate != null" >
+        CommentState = #{commentstate,jdbcType=VARCHAR},
+      </if>
+      <if test="passageid != null" >
+        PassageId = #{passageid,jdbcType=INTEGER},
+      </if>
+      <if test="commentifdeleted != null" >
+        CommentIfdeleted = #{commentifdeleted,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CommentId = #{commentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Pojo.Comment" >
+    update Comment
+    set CommentContent = #{commentcontent,jdbcType=VARCHAR},
+      CommentTime = #{commenttime,jdbcType=TIMESTAMP},
+      CommentPeoplename = #{commentpeoplename,jdbcType=VARCHAR},
+      CommentState = #{commentstate,jdbcType=VARCHAR},
+      PassageId = #{passageid,jdbcType=INTEGER},
+      CommentIfdeleted = #{commentifdeleted,jdbcType=VARCHAR}
+    where CommentId = #{commentid,jdbcType=INTEGER}
+  </update>
+</mapper>
