@@ -16,7 +16,7 @@
             <transactionManager type="JDBC"/><!-- 配置JDBC事物控制，由mybatis进行管理 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://120.79.249.199/mydb?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="url" value="jdbc:mysql://localhost/mydb?useUnicode=true&amp;characterEncoding=utf8"/>
                 <property name="username" value="cong"/>
                 <property name="password" value="lll111222"/>
             </dataSource>
